@@ -126,7 +126,7 @@ public:
         assert(genesis.hashMerkleRoot == uint256S("0xc33614a63c5382f71967c273f8f573faa5b09ed87620ea89504982118bd5e5b5"));
 
         // Note that of those with the service bits flag, most only support a subset of possible options
-        vSeeds.emplace_back("MAINNET SEED DOMAIN", true);
+        vSeeds.emplace_back("185.185.126.143", true);
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,38);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
