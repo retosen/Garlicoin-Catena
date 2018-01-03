@@ -48,7 +48,7 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
  */
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
-    const char* pszTimestamp = "<DATE> <MESSAGE FOR SIGNATE> THIS IS A PLACEHOLDER";
+    const char* pszTimestamp = "1/3/18 This is the testnet";
     const CScript genesisOutputScript = CScript() << ParseHex("696984710fa689ad5023690c80f3a49c8f13f8d45b8c857fbcbc8bc4a8e4d3eb4b10f4d4604fa08dce601aaf0f470216fe1b51850b4acf21b179c45070ac7b03a9") << OP_CHECKSIG;
     return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
@@ -79,7 +79,7 @@ public:
         consensus.BIP34Hash = uint256S("fa09d204a83a768ed5a7c8d441fa62f2043abf420cff1226c7b4329aeb9d51cf");
         consensus.BIP65Height = 918684; // bab3041e8977e0dc3eeff63fe707b92bde1dd449d8efafb248c27c8264cc311a
         consensus.BIP66Height = 811879; // 7aceee012833fa8952f8835d8b1b3ae233cd6ab08fdb27a771d2bd7bdc491894
-        consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); 
+        consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 1.4 * 24 * 60 * 60; // 1.4 days
         consensus.nPowTargetSpacing = 1 * 60; // 60 seconds
         consensus.fPowAllowMinDifficultyBlocks = false;
@@ -120,10 +120,10 @@ public:
 
         // ToDo: first argument is epoch time. change to time of release for genesis block on alpha release.
         // second argument is nNonce, will be generated later. 0 for now. Reminder to change both these
-        genesis = CreateGenesisBlock(1514882685, 0, 0x1e0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1515002093, 3606002, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x"));
-        assert(genesis.hashMerkleRoot == uint256S("0x"));
+        assert(consensus.hashGenesisBlock == uint256S("0xe99da841b29de092a847214f1af5abf6ef38a50f607081b09692177555e5855e"));
+        assert(genesis.hashMerkleRoot == uint256S("0xc33614a63c5382f71967c273f8f573faa5b09ed87620ea89504982118bd5e5b5"));
 
         // Note that of those with the service bits flag, most only support a subset of possible options
         vSeeds.emplace_back("MAINNET SEED DOMAIN", true);
@@ -143,16 +143,16 @@ public:
 
         checkpointData = (CCheckpointData) {
             {
-                {  0, uint256S("0x")},
+                {  0, uint256S("0xe99da841b29de092a847214f1af5abf6ef38a50f607081b09692177555e5855e")},
             }
         };
 
         chainTxData = ChainTxData{
             // Data as of block db42d00d824950a125f9b08b6b6c282c484781562fa8b3bd29d6ce4a2627c348 (height 1259851).
-           //1502955334, // * UNIX timestamp of last known number of transactions
-            //11428845,  // * total number of transactions between genesis and that timestamp
+           1515002093, // * UNIX timestamp of last known number of transactions
+            1,  // * total number of transactions between genesis and that timestamp
                     //   (the tx=... number in the SetBestChain debug.log lines)
-            //0.06     // * estimated number of transactions per second after that timestamp
+            0.00     // * estimated number of transactions per second after that timestamp
         };
     }
 };
@@ -230,7 +230,7 @@ public:
 
         checkpointData = (CCheckpointData) {
             {
-                {0, uint256S("0x")},
+                {0, uint256S("0xe99da841b29de092a847214f1af5abf6ef38a50f607081b09692177555e5855e")},
             }
         };
 
@@ -297,7 +297,7 @@ public:
 
         fDefaultConsistencyChecks = true;
         fRequireStandard = false;
-        fMineBlocksOnDemand = true; 
+        fMineBlocksOnDemand = true;
 
         checkpointData = (CCheckpointData) {
             {
