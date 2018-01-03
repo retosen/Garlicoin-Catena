@@ -69,13 +69,13 @@ Build requirements:
 
 Options when installing required Boost library files:
 
-1. On at least Ubuntu 14.04+ and Debian 7+ there are generic names for the
+1. USE OPTION 2 On at least Ubuntu 14.04+ and Debian 7+ there are generic names for the
 individual boost development packages, so the following can be used to only
 install necessary parts of boost:
 
         sudo apt-get install libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
 
-2. If that doesn't work, you can install all boost development packages with:
+2. USE THIS INSTEAD If that doesn't work, you can install all boost development packages with:
 
         sudo apt-get install libboost-all-dev
 
