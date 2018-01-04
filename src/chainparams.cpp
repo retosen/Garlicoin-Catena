@@ -200,7 +200,7 @@ public:
         pchMessageStart[1] = 0xd2;
         pchMessageStart[2] = 0xc8;
         pchMessageStart[3] = 0xf1;
-        nDefaultPort = 19335;
+        nDefaultPort = 42075;
         nPruneAfterHeight = 1000;
 
         // ToDo: first argument is epoch time. change to time of release for genesis block on alpha release.

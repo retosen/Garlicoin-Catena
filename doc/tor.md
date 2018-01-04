@@ -43,7 +43,7 @@ config file):
 
 	HiddenServiceDir /var/lib/tor/garlicoin-service/
 	HiddenServicePort 42069 127.0.0.1:42069
-	HiddenServicePort 19335 127.0.0.1:19335
+	HiddenServicePort 42075 127.0.0.1:42075
 
 The directory can be different of course, but (both) port numbers should be equal to
 your garlicoind's P2P listen port (42069 by default).
