@@ -296,7 +296,7 @@ public:
 
     uint256 GetBlockPoWHash() const
     {
-        return GetBlockHeader().GetPoWHash(nTime);
+        return GetBlockHeader().GetPoWHash();
     }
 
     int64_t GetBlockTime() const

@@ -16,7 +16,7 @@ uint256 CBlockHeader::GetHash() const
     return SerializeHash(*this);
 }
 
-uint256 CBlockHeader::GetPoWHash(uint64_t nTimestamp) const
+uint256 CBlockHeader::GetPoWHash() const
 {
     uint256 thash;
     unsigned char Nfactor;
@@ -28,11 +28,11 @@ uint256 CBlockHeader::GetPoWHash(uint64_t nTimestamp) const
 
   	// n-factor will change every this interval is hit
   	uint64_t nChangeInterval = 17280000; // 200 days
-    if (nTimestamp <= nChainStartTime) {
+    if (nTime <= nChainStartTime) {
   		Nfactor = minNfactor;
   	} else {
-  		int64_t s = nTimestamp - nChainStartTime;
-  		int n = s/nChangeInterval + 10;
+  		int64_t s = nTime - nChainStartTime;
+  		int n = s/nChangeInterval + 9;
   		if (n < 0) n = 0;
   		unsigned char tempN = (unsigned char) n;
   		Nfactor = std::min(std::max(tempN, minNfactor), maxNfactor);
