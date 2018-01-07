@@ -253,12 +253,12 @@ static inline void xor_salsa8(uint32_t B[16], const uint32_t Bx[16])
 	B[15] += x15;
 }
 
-void scrypt_1024_1_1_256_sp_generic(const char *input, char *output, char *scratchpad)
+void scrypt_1024_1_1_256_sp_generic(const char *input, char *output, char *scratchpad, unsigned char Nfactor)
 {
 	uint8_t B[128];
 	uint32_t X[32];
 	uint32_t *V;
-	uint32_t i, j, k;
+	uint32_t i, j, k, N;
 
 	V = (uint32_t *)(((uintptr_t)(scratchpad) + 63) & ~ (uintptr_t)(63));
 
@@ -267,12 +267,14 @@ void scrypt_1024_1_1_256_sp_generic(const char *input, char *output, char *scrat
 	for (k = 0; k < 32; k++)
 		X[k] = le32dec(&B[4 * k]);
 
-	for (i = 0; i < 1024; i++) {
+  N = (1 << (Nfactor + 1));
+
+	for (i = 0; i < N; i++) {
 		memcpy(&V[i * 32], X, 128);
 		xor_salsa8(&X[0], &X[16]);
 		xor_salsa8(&X[16], &X[0]);
 	}
-	for (i = 0; i < 1024; i++) {
+	for (i = 0; i < N; i++) {
 		j = 32 * (X[16] & 1023);
 		for (k = 0; k < 32; k++)
 			X[k] ^= V[j + k];
@@ -286,10 +288,10 @@ void scrypt_1024_1_1_256_sp_generic(const char *input, char *output, char *scrat
 	PBKDF2_SHA256((const uint8_t *)input, 80, B, 128, 1, (uint8_t *)output, 32);
 }
 
-#if defined(USE_SSE2)
+//#if defined(USE_SSE2)
 // By default, set to generic scrypt function. This will prevent crash in case when scrypt_detect_sse2() wasn't called
-void (*scrypt_1024_1_1_256_sp_detected)(const char *input, char *output, char *scratchpad) = &scrypt_1024_1_1_256_sp_generic;
-
+//void (*scrypt_1024_1_1_256_sp_detected)(const char *input, char *output, char *scratchpad) = &scrypt_1024_1_1_256_sp_generic;
+/*
 std::string scrypt_detect_sse2()
 {
     std::string ret;
@@ -323,9 +325,9 @@ std::string scrypt_detect_sse2()
     return ret;
 }
 #endif
-
-void scrypt_1024_1_1_256(const char *input, char *output)
+*/
+void scrypt_1024_1_1_256(const char *input, char *output, unsigned char Nfactor)
 {
-	char scratchpad[SCRYPT_SCRATCHPAD_SIZE];
-    scrypt_1024_1_1_256_sp(input, output, scratchpad);
+	char scratchpad[((1 << (Nfactor + 1)) * 128 ) + 63];
+    scrypt_1024_1_1_256_sp_generic(input, output, scratchpad, Nfactor);
 }

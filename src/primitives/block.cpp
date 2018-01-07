@@ -16,10 +16,28 @@ uint256 CBlockHeader::GetHash() const
     return SerializeHash(*this);
 }
 
-uint256 CBlockHeader::GetPoWHash() const
+uint256 CBlockHeader::GetPoWHash(uint64_t nTimestamp) const
 {
     uint256 thash;
-    scrypt_1024_1_1_256(BEGIN(nVersion), BEGIN(thash));
+    unsigned char Nfactor;
+    const unsigned char minNfactor = 10;
+  	const unsigned char maxNfactor = 20;
+
+  	// epoch times of chain start and current block time
+  	uint64_t nChainStartTime = 1515002093;
+
+  	// n-factor will change every this interval is hit
+  	uint64_t nChangeInterval = 17280000; // 200 days
+    if (nTimestamp <= nChainStartTime) {
+  		Nfactor = minNfactor;
+  	} else {
+  		int64_t s = nTimestamp - nChainStartTime;
+  		int n = s/nChangeInterval + 10;
+  		if (n < 0) n = 0;
+  		unsigned char tempN = (unsigned char) n;
+  		Nfactor = std::min(std::max(tempN, minNfactor), maxNfactor);
+  	}
+    scrypt_1024_1_1_256(BEGIN(nVersion), BEGIN(thash), Nfactor);
     return thash;
 }
 
