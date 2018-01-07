@@ -27,7 +27,7 @@ uint256 CBlockHeader::GetPoWHash() const
   	uint64_t nChainStartTime = 1515002093;
 
   	// n-factor will change every this interval is hit
-  	uint64_t nChangeInterval = 17280000; // 200 days
+  	uint64_t nChangeInterval = 437676; // HARD FORK SCHEDULED 
     if (nTime <= nChainStartTime) {
   		Nfactor = minNfactor;
   	} else {
