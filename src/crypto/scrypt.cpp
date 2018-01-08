@@ -34,15 +34,15 @@
 #include <string.h>
 #include <openssl/sha.h>
 
-//#if defined(USE_SSE2) && !defined(USE_SSE2_ALWAYS)
-//#ifdef _MSC_VER
+#if defined(USE_SSE2) && !defined(USE_SSE2_ALWAYS)
+#ifdef _MSC_VER
 // MSVC 64bit is unable to use inline asm
-//#include <intrin.h>
-//#else
+#include <intrin.h>
+#else
 // GCC Linux or i686-w64-mingw32
-//#include <cpuid.h>
-//#endif
-//#endif
+#include <cpuid.h>
+#endif
+#endif
 
 static inline uint32_t be32dec(const void *pp)
 {
@@ -253,7 +253,7 @@ static inline void xor_salsa8(uint32_t B[16], const uint32_t Bx[16])
 	B[15] += x15;
 }
 
-void scrypt_1024_1_1_256_sp_generic(const char *input, char *output, char *scratchpad, unsigned char Nfactor)
+void scrypt_N_1_1_256_sp_generic(const char *input, char *output, char *scratchpad, unsigned char Nfactor)
 {
 	uint8_t B[128];
 	uint32_t X[32];
@@ -289,10 +289,10 @@ void scrypt_1024_1_1_256_sp_generic(const char *input, char *output, char *scrat
 	PBKDF2_SHA256((const uint8_t *)input, 80, B, 128, 1, (uint8_t *)output, 32);
 }
 
-//#if defined(USE_SSE2)
+#if defined(USE_SSE2)
 // By default, set to generic scrypt function. This will prevent crash in case when scrypt_detect_sse2() wasn't called
-//void (*scrypt_1024_1_1_256_sp_detected)(const char *input, char *output, char *scratchpad, unsigned char Nfactor) = &scrypt_1024_1_1_256_sp_generic;
-/*
+void (*scrypt_N_1_1_256_sp_detected)(const char *input, char *output, char *scratchpad, unsigned char Nfactor) = &scrypt_N_1_1_256_sp_generic;
+
 std::string scrypt_detect_sse2()
 {
     std::string ret;
@@ -314,21 +314,22 @@ std::string scrypt_detect_sse2()
 
     if (cpuid_edx & 1<<26)
     {
-        scrypt_1024_1_1_256_sp_detected = &scrypt_1024_1_1_256_sp_sse2;
+        scrypt_N_1_1_256_sp_detected = &scrypt_N_1_1_256_sp_sse2;
         ret = "scrypt: using scrypt-sse2 as detected");
     }
     else
     {
-        scrypt_1024_1_1_256_sp_detected = &scrypt_1024_1_1_256_sp_generic;
+        scrypt_N_1_1_256_sp_detected = &scrypt_N_1_1_256_sp_generic;
         ret = "scrypt: using scrypt-generic, SSE2 unavailable";
     }
 #endif // USE_SSE2_ALWAYS
     return ret;
 }
 #endif
-*/
-void scrypt_1024_1_1_256(const char *input, char *output, unsigned char Nfactor)
+
+void scrypt_N_1_1_256(const char *input, char *output, unsigned char Nfactor)
 {
-	  char scratchpad[((1 << (Nfactor + 1)) * 128 ) + 63];
-    scrypt_1024_1_1_256_sp_generic(input, output, scratchpad, Nfactor);
+	  char *scratchpad = (char*) malloc(((1 << (Nfactor + 1)) * 128 ) + 63);
+    scrypt_N_1_1_256_sp_generic(input, output, scratchpad, Nfactor);
+    free(scratchpad);
 }
