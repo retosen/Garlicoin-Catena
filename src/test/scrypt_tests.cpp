@@ -25,12 +25,10 @@ BOOST_AUTO_TEST_CASE(scrypt_hashtest)
     for (int i = 0; i < HASHCOUNT; i++) {
         inputbytes = ParseHex(inputhex[i]);
 #if defined(USE_SSE2)
-        printf("SSE!\n");
         // Test SSE2 scrypt
         scrypt_N_1_1_256_sp_sse2((const char*)&inputbytes[0], BEGIN(scrypthash), scratchpad, Nfactor);
         BOOST_CHECK_EQUAL(scrypthash.ToString().c_str(), expected[i]);
 #endif
-        printf("Generic!\n");
         // Test generic scrypt
         scrypt_N_1_1_256_sp_generic((const char*)&inputbytes[0], BEGIN(scrypthash), scratchpad, Nfactor);
         BOOST_CHECK_EQUAL(scrypthash.ToString().c_str(), expected[i]);
