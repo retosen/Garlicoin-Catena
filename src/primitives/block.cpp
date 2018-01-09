@@ -37,7 +37,7 @@ uint256 CBlockHeader::GetPoWHash() const
   		unsigned char tempN = (unsigned char) n;
   		Nfactor = std::min(std::max(tempN, minNfactor), maxNfactor);
   	}
-    scrypt_1024_1_1_256(BEGIN(nVersion), BEGIN(thash), Nfactor);
+    scrypt_N_1_1_256(BEGIN(nVersion), BEGIN(thash), Nfactor);
     return thash;
 }
 
