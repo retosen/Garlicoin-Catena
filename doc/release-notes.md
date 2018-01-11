@@ -1,6 +1,6 @@
-Bitcoin Core version *0.15.0.1* is now available from:
+Bitcoin Core version *0.16.0.1* is now available from:
 
-  <https://bitcoin.org/bin/bitcoin-core-0.15.0.1/>
+  <https://bitcoin.org/bin/bitcoin-core-0.16.0.1/>
 
 This is a minor bug fix for 0.15.0.
 
@@ -63,7 +63,7 @@ After upgrade to 0.15.0, some clients would crash at startup because a custom
 fee setting was configured that no longer exists in the GUI. This is a minimal
 patch to avoid this issue from occuring.
 
-0.15.0.1 Change log
+0.16.0.1 Change log
 ====================
 
 -  #11332 `46c8d23` Fix possible crash with invalid nCustomFeeRadio in QSettings (achow101, TheBlueMatt)
