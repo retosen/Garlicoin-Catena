@@ -19,7 +19,25 @@ uint256 CBlockHeader::GetHash() const
 uint256 CBlockHeader::GetPoWHash() const
 {
     uint256 thash;
-    scrypt_1024_1_1_256(BEGIN(nVersion), BEGIN(thash));
+    unsigned char Nfactor;
+    const unsigned char minNfactor = 9;
+  	const unsigned char maxNfactor = 20;
+
+  	// epoch times of chain start and current block time
+  	int64_t nChainStartTime = 1515002093;
+
+  	// n-factor will change every this interval is hit
+  	int64_t nChangeInterval = 437676; // HARD FORK SCHEDULED
+    if (GetBlockTime() <= nChainStartTime) {
+  		Nfactor = minNfactor;
+  	} else {
+  		int64_t s = GetBlockTime() - nChainStartTime;
+  		int n = s/nChangeInterval + 9;
+  		if (n < 0) n = 0;
+  		unsigned char tempN = (unsigned char) n;
+  		Nfactor = std::min(std::max(tempN, minNfactor), maxNfactor);
+  	}
+    scrypt_N_1_1_256(BEGIN(nVersion), BEGIN(thash), Nfactor);
     return thash;
 }
 

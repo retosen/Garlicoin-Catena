@@ -1,5 +1,7 @@
 #include <boost/test/unit_test.hpp>
 
+#include <cstdio>
+
 #include "uint256.h"
 #include "util.h"
 #include "utilstrencodings.h"
@@ -18,18 +20,20 @@ BOOST_AUTO_TEST_CASE(scrypt_hashtest)
 #endif
     uint256 scrypthash;
     std::vector<unsigned char> inputbytes;
-    char scratchpad[SCRYPT_SCRATCHPAD_SIZE];
+    unsigned char Nfactor = 9; // Temporary value until we can build proper tests.
+    char *scratchpad = (char*) malloc(((1 << (Nfactor + 1)) * 128 ) + 63);
     for (int i = 0; i < HASHCOUNT; i++) {
         inputbytes = ParseHex(inputhex[i]);
 #if defined(USE_SSE2)
         // Test SSE2 scrypt
-        scrypt_1024_1_1_256_sp_sse2((const char*)&inputbytes[0], BEGIN(scrypthash), scratchpad);
+        scrypt_N_1_1_256_sp_sse2((const char*)&inputbytes[0], BEGIN(scrypthash), scratchpad, Nfactor);
         BOOST_CHECK_EQUAL(scrypthash.ToString().c_str(), expected[i]);
 #endif
         // Test generic scrypt
-        scrypt_1024_1_1_256_sp_generic((const char*)&inputbytes[0], BEGIN(scrypthash), scratchpad);
+        scrypt_N_1_1_256_sp_generic((const char*)&inputbytes[0], BEGIN(scrypthash), scratchpad, Nfactor);
         BOOST_CHECK_EQUAL(scrypthash.ToString().c_str(), expected[i]);
     }
+    free(scratchpad);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -253,12 +253,12 @@ static inline void xor_salsa8(uint32_t B[16], const uint32_t Bx[16])
 	B[15] += x15;
 }
 
-void scrypt_1024_1_1_256_sp_generic(const char *input, char *output, char *scratchpad)
+void scrypt_N_1_1_256_sp_generic(const char *input, char *output, char *scratchpad, unsigned char Nfactor)
 {
 	uint8_t B[128];
 	uint32_t X[32];
 	uint32_t *V;
-	uint32_t i, j, k;
+	uint32_t i, j, k, N;
 
 	V = (uint32_t *)(((uintptr_t)(scratchpad) + 63) & ~ (uintptr_t)(63));
 
@@ -267,13 +267,16 @@ void scrypt_1024_1_1_256_sp_generic(const char *input, char *output, char *scrat
 	for (k = 0; k < 32; k++)
 		X[k] = le32dec(&B[4 * k]);
 
-	for (i = 0; i < 1024; i++) {
+  N = (1 << (Nfactor + 1));
+
+	for (i = 0; i < N; i++) {
 		memcpy(&V[i * 32], X, 128);
 		xor_salsa8(&X[0], &X[16]);
 		xor_salsa8(&X[16], &X[0]);
 	}
-	for (i = 0; i < 1024; i++) {
-		j = 32 * (X[16] & 1023);
+
+	for (i = 0; i < N; i++) {
+		j = 32 * (X[16] & (N - 1));
 		for (k = 0; k < 32; k++)
 			X[k] ^= V[j + k];
 		xor_salsa8(&X[0], &X[16]);
@@ -288,7 +291,7 @@ void scrypt_1024_1_1_256_sp_generic(const char *input, char *output, char *scrat
 
 #if defined(USE_SSE2)
 // By default, set to generic scrypt function. This will prevent crash in case when scrypt_detect_sse2() wasn't called
-void (*scrypt_1024_1_1_256_sp_detected)(const char *input, char *output, char *scratchpad) = &scrypt_1024_1_1_256_sp_generic;
+void (*scrypt_N_1_1_256_sp_detected)(const char *input, char *output, char *scratchpad, unsigned char Nfactor) = &scrypt_N_1_1_256_sp_generic;
 
 std::string scrypt_detect_sse2()
 {
@@ -311,12 +314,12 @@ std::string scrypt_detect_sse2()
 
     if (cpuid_edx & 1<<26)
     {
-        scrypt_1024_1_1_256_sp_detected = &scrypt_1024_1_1_256_sp_sse2;
+        scrypt_N_1_1_256_sp_detected = &scrypt_N_1_1_256_sp_sse2;
         ret = "scrypt: using scrypt-sse2 as detected");
     }
     else
     {
-        scrypt_1024_1_1_256_sp_detected = &scrypt_1024_1_1_256_sp_generic;
+        scrypt_N_1_1_256_sp_detected = &scrypt_N_1_1_256_sp_generic;
         ret = "scrypt: using scrypt-generic, SSE2 unavailable";
     }
 #endif // USE_SSE2_ALWAYS
@@ -324,8 +327,9 @@ std::string scrypt_detect_sse2()
 }
 #endif
 
-void scrypt_1024_1_1_256(const char *input, char *output)
+void scrypt_N_1_1_256(const char *input, char *output, unsigned char Nfactor)
 {
-	char scratchpad[SCRYPT_SCRATCHPAD_SIZE];
-    scrypt_1024_1_1_256_sp(input, output, scratchpad);
+	  char *scratchpad = (char*) malloc(((1 << (Nfactor + 1)) * 128 ) + 63);
+    scrypt_N_1_1_256_sp_generic(input, output, scratchpad, Nfactor);
+    free(scratchpad);
 }
