@@ -213,7 +213,7 @@ public:
         vFixedSeeds.clear();
         vSeeds.clear();
         // nodes with support for servicebits filtering should be at the top
-        vSeeds.emplace_back("TESTNET SEED DOMAIN", true);
+        vSeeds.emplace_back("dnsseed.brennanmcdonald.io", true);
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);
@@ -295,7 +295,7 @@ public:
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
 
         vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.
-	vSeeds.emplace_back("seeddns.brennanmcdonald.io", true);
+	vSeeds.emplace_back("dnsseed.brennanmcdonald.io", true);
 
         fDefaultConsistencyChecks = true;
         fRequireStandard = false;
