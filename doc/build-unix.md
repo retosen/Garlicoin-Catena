@@ -276,11 +276,12 @@ Setup and Build Example: Arch Linux
 This example lists the steps necessary to setup and build a command line only, non-wallet distribution of the latest changes on Arch Linux:
 
     pacman -S git base-devel boost libevent python
-    git clone https://github.com/garlicoin-project/garlicoin.git
-    cd garlicoin/
+    git clone https://github.com/retosen/Garlicoin
+    cd Garlicoin/
     ./autogen.sh
-    ./configure --disable-wallet --without-gui --without-miniupnpc
-    make check
+    ./configure --without-gui --with-incompatible-bdb --disable-tests
+    make
+    sudo make install
 
 Note:
 Enabling wallet support requires either compiling against a Berkeley DB newer than 4.8 (package `db`) using `--with-incompatible-bdb`,
