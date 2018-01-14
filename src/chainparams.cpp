@@ -48,7 +48,7 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
  */
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
-    const char* pszTimestamp = "If this post gets 30,000 upvotes, I will make a garlic bread cryptocurrency called garlicoin";
+    const char* pszTimestamp = "If this post gets 30000 upvotes I will make a garlic bread cryptocurrency called garlicoin";
     const CScript genesisOutputScript = CScript() << ParseHex("696984710fa689ad5023690c80f3a49c8f13f8d45b8c857fbcbc8bc4a8e4d3eb4b10f4d4604fa08dce601aaf0f470216fe1b51850b4acf21b179c45070ac7b03a9") << OP_CHECKSIG;
     return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
@@ -76,7 +76,7 @@ public:
         strNetworkID = "main";
         consensus.nSubsidyHalvingInterval = 690000;
         consensus.BIP34Height = 0;
-        consensus.BIP34Hash = uint256S("0x98a4853097e326bfaf7b1ced70bc180218129f31a70daa211c30442c4d273730");
+        consensus.BIP34Hash = uint256S("0x2ada80bf415a89358d697569c96eb98cdbf4c3b8878ac5722c01284492e27228");
         consensus.BIP65Height = 0; // bab3041e8977e0dc3eeff63fe707b92bde1dd449d8efafb248c27c8264cc311a
         consensus.BIP66Height = 0; // 7aceee012833fa8952f8835d8b1b3ae233cd6ab08fdb27a771d2bd7bdc491894
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
@@ -104,7 +104,7 @@ public:
         consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000000000");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x98a4853097e326bfaf7b1ced70bc180218129f31a70daa211c30442c4d273730");
+        consensus.defaultAssumeValid = uint256S("0x2ada80bf415a89358d697569c96eb98cdbf4c3b8878ac5722c01284492e27228");
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -122,10 +122,10 @@ public:
 
         // ToDo: first argument is epoch time. change to time of release for genesis block on alpha release.
         // second argument is nNonce, will be generated later. 0 for now. Reminder to change both these
-        genesis = CreateGenesisBlock(1515925970, 1805159, 0x1e0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1515925970, 811793, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x98a4853097e326bfaf7b1ced70bc180218129f31a70daa211c30442c4d273730"));
-        assert(genesis.hashMerkleRoot == uint256S("0x9fa3be2f5d9742221ec8a694d1399ae81ae3971dccc057faba9e1587811e327d"));
+        assert(consensus.hashGenesisBlock == uint256S("0x2ada80bf415a89358d697569c96eb98cdbf4c3b8878ac5722c01284492e27228"));
+        assert(genesis.hashMerkleRoot == uint256S("0x5f32b33db6dcab182dfad55b3d04b2978c1598cf82519835e000dd77e37f3aa8"));
 
         // Note that of those with the service bits flag, most only support a subset of possible options
         //Put seed nodes here
@@ -146,7 +146,7 @@ public:
 
         checkpointData = (CCheckpointData) {
             {
-                {  0, uint256S("0x98a4853097e326bfaf7b1ced70bc180218129f31a70daa211c30442c4d273730")},
+                {  0, uint256S("0x2ada80bf415a89358d697569c96eb98cdbf4c3b8878ac5722c01284492e27228")},
             }
         };
 
@@ -208,7 +208,7 @@ public:
 
         // ToDo: first argument is epoch time. change to time of release for genesis block on alpha release.
         // second argument is nNonce, will be generated later. 0 for now. Reminder to change both these
-        //Currently broken. New genesis block must be generated 
+        //Currently broken. New genesis block must be generated
         genesis = CreateGenesisBlock(1515002093, 3606002, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0xe99da841b29de092a847214f1af5abf6ef38a50f607081b09692177555e5855e"));
