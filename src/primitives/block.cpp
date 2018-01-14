@@ -20,19 +20,19 @@ uint256 CBlockHeader::GetPoWHash() const
 {
     uint256 thash;
     unsigned char Nfactor;
-    const unsigned char minNfactor = 9;
+    const unsigned char minNfactor = 10;
   	const unsigned char maxNfactor = 20;
 
   	// epoch times of chain start and current block time
-  	int64_t nChainStartTime = 1515002093;
+  	int64_t nChainStartTime = 1515925970;
 
   	// n-factor will change every this interval is hit
-  	int64_t nChangeInterval = 437676; // HARD FORK SCHEDULED
+  	int64_t nChangeInterval = 17280000; //200 days
     if (GetBlockTime() <= nChainStartTime) {
   		Nfactor = minNfactor;
   	} else {
   		int64_t s = GetBlockTime() - nChainStartTime;
-  		int n = s/nChangeInterval + 9;
+  		int n = s/nChangeInterval + 10;
   		if (n < 0) n = 0;
   		unsigned char tempN = (unsigned char) n;
   		Nfactor = std::min(std::max(tempN, minNfactor), maxNfactor);
