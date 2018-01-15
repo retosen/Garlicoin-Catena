@@ -118,11 +118,9 @@ public:
         nDefaultPort = 42069;
         nPruneAfterHeight = 100000;
 
-        // GENESIS BLOCK TIMESTAMP: 1515925970
-
         // ToDo: first argument is epoch time. change to time of release for genesis block on alpha release.
         // second argument is nNonce, will be generated later. 0 for now. Reminder to change both these
-        genesis = CreateGenesisBlock(1515925970, 811793, 0x1e0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(timestampHere, 811793, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x2ada80bf415a89358d697569c96eb98cdbf4c3b8878ac5722c01284492e27228"));
         assert(genesis.hashMerkleRoot == uint256S("0x5f32b33db6dcab182dfad55b3d04b2978c1598cf82519835e000dd77e37f3aa8"));
@@ -152,7 +150,7 @@ public:
 
         chainTxData = ChainTxData{
             // Data as of block db42d00d824950a125f9b08b6b6c282c484781562fa8b3bd29d6ce4a2627c348 (height 1259851).
-           1515925970, // * UNIX timestamp of last known number of transactions
+           timestampHere, // * UNIX timestamp of last known number of transactions
             1,  // * total number of transactions between genesis and that timestamp
                     //   (the tx=... number in the SetBestChain debug.log lines)
             0.00     // * estimated number of transactions per second after that timestamp
@@ -211,8 +209,8 @@ public:
         //Currently broken. New genesis block must be generated
         genesis = CreateGenesisBlock(1515002093, 3606002, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0xe99da841b29de092a847214f1af5abf6ef38a50f607081b09692177555e5855e"));
-        assert(genesis.hashMerkleRoot == uint256S("0xc33614a63c5382f71967c273f8f573faa5b09ed87620ea89504982118bd5e5b5"));
+        assert(consensus.hashGenesisBlock == uint256S("0x69441a7748fdbef3cfedfca0e56a565394a15271da511dbe6ea58bb99930ef6e"));
+        assert(genesis.hashMerkleRoot == uint256S("0xec41956c4330ac1f4311a68facf4adc22303655e7027b99fc8be369608afa189"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
