@@ -24,10 +24,10 @@ uint256 CBlockHeader::GetPoWHash() const
   	const unsigned char maxNfactor = 20;
 
   	// epoch times of chain start and current block time
-  	int64_t nChainStartTime = timestampHere;
+  	int64_t nChainStartTime = 1515925970;
 
   	// n-factor will change every this interval is hit
-  	int64_t nChangeInterval = 17280000; //200 days
+  	int64_t nChangeInterval = 36288000; //200 days
     if (GetBlockTime() <= nChainStartTime) {
   		Nfactor = minNfactor;
   	} else {
