@@ -28,11 +28,13 @@ uint256 CBlockHeader::GetPoWHash() const
 
   	// n-factor will change every this interval is hit
   	int64_t nChangeInterval = 36288000; //200 days
+
     if (GetBlockTime() <= nChainStartTime) {
   		Nfactor = minNfactor;
   	} else {
   		int64_t s = GetBlockTime() - nChainStartTime;
   		int n = s/nChangeInterval + 10;
+
   		if (n < 0) n = 0;
   		unsigned char tempN = (unsigned char) n;
   		Nfactor = std::min(std::max(tempN, minNfactor), maxNfactor);

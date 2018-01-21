@@ -125,6 +125,7 @@ public:
         assert(consensus.hashGenesisBlock == uint256S("0x2ada80bf415a89358d697569c96eb98cdbf4c3b8878ac5722c01284492e27228"));
         assert(genesis.hashMerkleRoot == uint256S("0x5f32b33db6dcab182dfad55b3d04b2978c1598cf82519835e000dd77e37f3aa8"));
 
+
         // Note that of those with the service bits flag, most only support a subset of possible options
         //Put seed nodes here
         vSeeds.emplace_back("dnsseed.brennanmcdonald.io", true);
@@ -211,6 +212,8 @@ public:
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x69441a7748fdbef3cfedfca0e56a565394a15271da511dbe6ea58bb99930ef6e"));
         assert(genesis.hashMerkleRoot == uint256S("0xec41956c4330ac1f4311a68facf4adc22303655e7027b99fc8be369608afa189"));
+
+
 
         vFixedSeeds.clear();
         vSeeds.clear();
