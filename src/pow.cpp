@@ -110,13 +110,7 @@ unsigned int GetNextWorkRequiredBTC(const CBlockIndex* pindexLast, const CBlockH
 
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
 {
-  //most recent algo first
-  if (pindexLast->nHeight + 1 >= 30000) {
-      return DarkGravityWave(pindexLast, params);
-  }
-  else {
-    return GetNextWorkRequiredBTC(pindexLast, pblock, params);
-  }
+  return DarkGravityWave(pindexLast, params);
 }
 
 //for BTC diff algo
