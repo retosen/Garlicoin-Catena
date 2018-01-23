@@ -209,17 +209,17 @@ public:
         // ToDo: first argument is epoch time. change to time of release for genesis block on alpha release.
         // second argument is nNonce, will be generated later. 0 for now. Reminder to change both these
         //Currently broken. New genesis block must be generated
-        genesis = CreateGenesisBlock(1515002093, 3606002, 0x1e0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1516729643, 1047651, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x69441a7748fdbef3cfedfca0e56a565394a15271da511dbe6ea58bb99930ef6e"));
-        assert(genesis.hashMerkleRoot == uint256S("0xec41956c4330ac1f4311a68facf4adc22303655e7027b99fc8be369608afa189"));
+        assert(consensus.hashGenesisBlock == uint256S("0xb25004ec2dc27689999f9ee14856ee0464d7f73f3fae3cf43c1d40f89c141aea"));
+        assert(genesis.hashMerkleRoot == uint256S("0x5f32b33db6dcab182dfad55b3d04b2978c1598cf82519835e000dd77e37f3aa8"));
 
 
 
         vFixedSeeds.clear();
         vSeeds.clear();
         // nodes with support for servicebits filtering should be at the top
-        vSeeds.emplace_back("dnsseed-testnet.brennanmcdonald.io", true);
+        //vSeeds.emplace_back("dnsseed-testnet.brennanmcdonald.io", true);
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);
@@ -236,13 +236,13 @@ public:
 
         checkpointData = (CCheckpointData) {
             {
-                {0, uint256S("0xe99da841b29de092a847214f1af5abf6ef38a50f607081b09692177555e5855e")},
+                {0, uint256S("0xb25004ec2dc27689999f9ee14856ee0464d7f73f3fae3cf43c1d40f89c141aea")},
             }
         };
 
         chainTxData = ChainTxData{
             // Data as of block 3351b6229da00b47ad7a8d7e1323b0e2874744b5296e3d6448293463ab758624 (height 153489)
-            1515002093,
+            1516729643,
             1,
             0.00
         };
