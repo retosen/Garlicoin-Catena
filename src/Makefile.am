@@ -268,7 +268,17 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/sha256.cpp \
   crypto/sha256.h \
   crypto/sha512.cpp \
-  crypto/sha512.h
+  crypto/sha512.h \
+	crypto/catena/src/blake2-ref/blake2s-ref.c \
+	crypto/catena/src/blake2-ref/blake2-impl.h \
+	crypto/catena/src/blake2-ref/blake2.h \
+	crypto/catena/src/catena-blake2s-ref.c \
+	crypto/catena/src/catena-DBG.c \
+	crypto/catena/src/cathash.h \
+	crypto/catena/src/catena-helpers.c \
+	crypto/catena/src/catena-helpers.h \
+	crypto/catena/src/catena.c \
+	crypto/catena/src/catena.h
 
 if EXPERIMENTAL_ASM
 crypto_libbitcoin_crypto_a_SOURCES += crypto/sha256_sse4.cpp

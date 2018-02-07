@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #include "catena.h"
+#include "cathash.h"
 
 void print_hex(const char *message, const uint8_t *x, const int len)
 {
@@ -52,30 +53,16 @@ void simpletest(const char *password, const char *salt, const char *header,
 	      (uint8_t *) header,   strlen(header), garlic, H_LEN);
 }
 
-/*******************************************************************/
-
-void PHC_test()
-{
-  int i;
-  uint8_t j = 0;
-
-  for(i=0; i< 256; i++)test_output((uint8_t *) &i, 1, &j, 1, NULL ,0, 10, 32);
-  for(i=0; i< 256; i++)test_output(&j, 1, (uint8_t *) &i, 1, NULL ,0, 10, 32);
-}
-
-/*******************************************************************/
 
 int main()
 {
-  simpletest("password", "salt", "", 1);
+  simpletest("pass", "", "", 1);
   simpletest("password", "salt", "", 10);
   simpletest("password", "salt", "data", 10);
 
   simpletest("passwordPASSWORDpassword",
 	     "saltSALTsaltSALTsaltSALTsaltSALTsalt","", 10);
 
-
-  PHC_test();
 
   return 0;
 }

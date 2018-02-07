@@ -4,20 +4,19 @@
 
 #ifdef __SSE2__
 #include <emmintrin.h>
-#endif 
+#endif
 
-#include "hash.h"
+#include "cathash.h"
 #include "catena-helpers.h"
 
 const uint8_t ZERO8[H_LEN] = {0}; //H_LEN 0s
 
-
-inline void initmem(const uint8_t x[H_LEN], const uint64_t c, uint8_t *r)
+void initmem(const uint8_t x[H_LEN], const uint64_t c, uint8_t *r)
 {
   uint8_t *vm2 = (uint8_t*) malloc(H_LEN);
   uint8_t *vm1 = (uint8_t*) malloc(H_LEN);
   H_INIT(x, H_LEN, vm1, vm2);
-  
+
   __ResetState();
   __HashFast(0, vm1, vm2, r);
   __HashFast(1, r, vm1, r+H_LEN);
@@ -31,7 +30,7 @@ inline void initmem(const uint8_t x[H_LEN], const uint64_t c, uint8_t *r)
 }
 
 
-inline void gamma(const uint8_t garlic, const uint8_t *salt, 
+void gamma(const uint8_t garlic, const uint8_t *salt,
                   const uint8_t saltlen, uint8_t *r)
 {
   const uint64_t q = UINT64_C(1) << ((3*garlic+3)/4);
@@ -43,13 +42,13 @@ inline void gamma(const uint8_t garlic, const uint8_t *salt,
   __Hash1(salt, saltlen, tmp);  //tmp <- H(S)
   __Hash1(tmp, H_LEN, tmp2);    //tmp2 <- H(H(S))
   initXSState(tmp, tmp2);
-  
+
   __ResetState();
   for(i = 0; i < q; i++){
     j = xorshift1024star() >> (64 - garlic);
     j2 = xorshift1024star() >> (64 - garlic);
     //v_j1= H'(v_j1||v_j2)
-    __HashFast(i, r + j * H_LEN, r + j2 * H_LEN, r + j * H_LEN); 
+    __HashFast(i, r + j * H_LEN, r + j2 * H_LEN, r + j * H_LEN);
   }
 
   free(tmp);
@@ -78,7 +77,6 @@ void XOR(const uint8_t *input1, const uint8_t *input2, uint8_t *output)
 void H_INIT(const uint8_t* x, const uint16_t xlen,  uint8_t *vm1, uint8_t *vm2){
   const uint8_t l = 2;
   uint8_t *tmp = (uint8_t*) malloc(l*H_LEN);
-
   for(uint8_t i=0; i!=l;++i){
     __Hash2(&i, 1, x, xlen, tmp+i*H_LEN);
   }
@@ -96,9 +94,10 @@ void H_First(const uint8_t* i1, const uint8_t* i2, uint8_t* hash){
   free(x);
 }
 
+//HEAVILY MODIFIED - PROBABLY BROKEN
 //see: http://en.wikipedia.org/wiki/Xorshift#Variations
 static int p;
-static uint64_t s[16];
+static uint64_t s[8]; //changed from 16
 
 void initXSState(const uint8_t* a, const uint8_t* b){
   p = 0;
@@ -106,13 +105,13 @@ void initXSState(const uint8_t* a, const uint8_t* b){
   // memcpy(s, a, H_LEN);
   // memcpy(&s[8], b, H_LEN);
   //on little endian
-  for(int i = 0; i < 8; i++){
+  for(int i = 0; i < 4; i++){
     s[i] = UINT64_C(0);
     s[i+8] = UINT64_C(0);
 
-    for(int j = 0; j < 8; j++){
-      s[i] |= ((uint64_t)a[i*8+j]) << j*8;
-      s[i+8] |= ((uint64_t)b[i*8+j]) << j*8;
+    for(int j = 0; j < 4; j++){
+      s[i] |= ((uint64_t)a[i*4+j]) << j*4;
+      s[i+4] |= ((uint64_t)b[i*4+j]) << j*4;
     }
   }
 }
@@ -127,10 +126,10 @@ uint64_t xorshift1024star() {
 }
 
 
-/* Our tests showed the memset to be always executed independent of 
+/* Our tests showed the memset to be always executed independent of
 * optimization. To ensure it stays that way, enable the no optimization flags.
 */
-void 
+void
 #if defined(__clang__)
 #if __has_attribute(optnone)
  __attribute__((optnone))

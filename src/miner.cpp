@@ -27,6 +27,7 @@
 #include "util.h"
 #include "utilmoneystr.h"
 #include "validationinterface.h"
+#include "crypto/catena/src/catena.h"
 
 #include <algorithm>
 #include <queue>

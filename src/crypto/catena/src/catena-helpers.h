@@ -1,19 +1,19 @@
 #ifndef _CATENA_HELPERS_H_
 #define _CATENA_HELPERS_H_
 
-#include "catena.h" 
+#include "catena.h"
 
 extern const uint8_t ZERO8[H_LEN/sizeof(uint8_t)]; //H_LEN 0s
 
 
 /* Initialize the top row/memory for Catena-Dragonfly and Butterfly
 */
-inline void initmem(const uint8_t x[H_LEN], const uint64_t c, uint8_t *r);
+void initmem(const uint8_t x[H_LEN], const uint64_t c, uint8_t *r);
 
 
 /* Gamma function for Catena-Dragonfly and Butterfly
 */
-inline void gamma(const uint8_t garlic, const uint8_t *salt, 
+void gamma(const uint8_t garlic, const uint8_t *salt,
                   const uint8_t saltlen, uint8_t *r);
 
 

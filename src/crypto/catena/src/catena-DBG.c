@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 #include "catena.h"
-#include "hash.h"
+#include "cathash.h"
 #include "catena-helpers.h"
 
 // Default values for Catena-Butterfly
@@ -60,6 +60,7 @@ void Flap(const uint8_t x[H_LEN], const uint8_t lambda, const uint8_t garlic,
   const uint64_t m = UINT64_C(1) << (garlic-1); //0.5 * 2^g
   const uint32_t l = 2 * garlic;
 
+
   uint8_t *r   = malloc((c+m)*H_LEN);
   uint8_t *tmp = malloc(H_LEN);
   uint64_t i,j;
@@ -83,6 +84,7 @@ void Flap(const uint8_t x[H_LEN], const uint8_t lambda, const uint8_t garlic,
       // __Hash2(tmp, H_LEN, r+idx(i-1,sigma(garlic,i-1,0),co,c,m) * H_LEN, H_LEN,
       //    r+idx(i,0,co,c,m) *H_LEN);
       H_First(tmp, r+idx(i-1,sigma(garlic,i-1,0),co,c,m) * H_LEN, r+idx(i,0,co,c,m) *H_LEN);
+      //printf("%x\n", tmp);
       __ResetState();
 
       //vertices

@@ -10,6 +10,7 @@
 #include "utilstrencodings.h"
 #include "crypto/common.h"
 #include "crypto/scrypt.h"
+#include "crypto/catena/src/catena.h"
 
 uint256 CBlockHeader::GetHash() const
 {
@@ -19,7 +20,7 @@ uint256 CBlockHeader::GetHash() const
 uint256 CBlockHeader::GetPoWHash() const
 {
     uint256 thash;
-    unsigned char Nfactor;
+    /*unsigned char Nfactor;
     const unsigned char minNfactor = 10;
   	const unsigned char maxNfactor = 20;
 
@@ -39,7 +40,9 @@ uint256 CBlockHeader::GetPoWHash() const
   		unsigned char tempN = (unsigned char) n;
   		Nfactor = std::min(std::max(tempN, minNfactor), maxNfactor);
   	}
-    scrypt_N_1_1_256(BEGIN(nVersion), BEGIN(thash), Nfactor);
+    scrypt_N_1_1_256(BEGIN(nVersion), BEGIN(thash), Nfactor);*/
+    RetHash(BEGIN(nVersion), BEGIN(thash));
+    //__Hash1("hello", 5, 32);
     return thash;
 }
 
