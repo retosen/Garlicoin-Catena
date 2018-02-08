@@ -9,7 +9,8 @@
 #include "tinyformat.h"
 #include "utilstrencodings.h"
 #include "crypto/common.h"
-#include "chainparams.h"
+#include "crypto/scrypt.h"
+#include "crypto/hashargon2d.h"
 
 uint256 CBlockHeader::GetHash() const
 {
@@ -21,11 +22,13 @@ uint256 CBlockHeader::GetPoWHash(bool bLyra2REv2) const
     uint256 thash;
     if (bLyra2REv2)
     {
-      lyra2re2_hash(BEGIN(nVersion), BEGIN(thash));
+        uint256 hash = HashArgon2d(BEGIN(nVersion), END(nNonce));
+        lyra2re2_hash(BEGIN(hash), BEGIN(thash));
+    //   lyra2re2_hash(BEGIN(nVersion), BEGIN(thash));
     }
     else
     {
-      scrypt_N_1_1_256(BEGIN(nVersion), BEGIN(thash), 10);
+        scrypt_N_1_1_256(BEGIN(nVersion), BEGIN(thash), 10);
     }
     return thash;
 }

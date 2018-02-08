@@ -171,7 +171,6 @@ BITCOIN_CORE_H = \
   zmq/zmqnotificationinterface.h \
   zmq/zmqpublishnotifier.h
 
-
 obj/build.h: FORCE
 	@$(MKDIR_P) $(builddir)/obj
 	@$(top_srcdir)/share/genbuild.sh "$(abs_top_builddir)/src/obj/build.h" \
@@ -254,6 +253,20 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/chacha20.h \
   crypto/chacha20.cpp \
   crypto/common.h \
+  crypto/argon2d/argon2.h \
+  crypto/argon2d/core.h \
+  crypto/argon2d/encoding.h \
+  crypto/argon2d/thread.h \
+  crypto/argon2d/argon2.c \
+  crypto/argon2d/core.c \
+  crypto/argon2d/encoding.c \
+  crypto/argon2d/opt.c \
+  crypto/argon2d/thread.c \
+  crypto/blake2/blake2b.c \
+  crypto/blake2/blake2.h \
+  crypto/blake2/blake2-impl.h \
+  crypto/blake2/blamka-round-opt.h \
+  crypto/blake2/blamka-round-ref.h \
   crypto/hmac_sha256.cpp \
   crypto/hmac_sha256.h \
   crypto/hmac_sha512.cpp \
