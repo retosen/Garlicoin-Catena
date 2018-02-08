@@ -16,10 +16,10 @@ uint256 CBlockHeader::GetHash() const
     return SerializeHash(*this);
 }
 
-uint256 CBlockHeader::GetPoWHash(int nHeight) const
+uint256 CBlockHeader::GetPoWHash(bool bLyra2REv2) const
 {
     uint256 thash;
-    if (Params().NetworkIDString() == CBaseChainParams::TESTNET && nHeight > 1000)
+    if (bLyra2REv2)
     {
       lyra2re2_hash(BEGIN(nVersion), BEGIN(thash));
     }
