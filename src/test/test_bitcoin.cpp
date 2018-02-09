@@ -148,7 +148,7 @@ TestChain100Setup::CreateAndProcessBlock(const std::vector<CMutableTransaction>&
         nHeight = pindexPrev->nHeight + 1;
     }
 
-    while (!CheckProofOfWork(block.GetPoWHash(Params().SwitchLyra2REv2Block(nHeight)), block.nBits, chainparams.GetConsensus())) ++block.nNonce;
+    while (!CheckProofOfWork(block.GetPoWHash(nHeight), block.nBits, chainparams.GetConsensus())) ++block.nNonce;
 
     std::shared_ptr<const CBlock> shared_pblock = std::make_shared<const CBlock>(block);
     ProcessNewBlock(chainparams, shared_pblock, true, nullptr);
