@@ -11,7 +11,7 @@
 #include "uint256.h"
 
 #include "crypto/scrypt.h"
-#include "crypto/Lyra2RE/Lyra2RE.h"
+#include "crypto/Allium/Allium.h"
 #include "crypto/blake2s/blake2s.h"
 
 /** Nodes collect new transactions into a block, hash them into a hash tree,

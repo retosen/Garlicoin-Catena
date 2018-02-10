@@ -271,8 +271,8 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/sha512.h \
   crypto/blake2s/blake2s.c \
   crypto/blake2s/blake2s.h \
-  crypto/Allium/Lyra2RE.c \
-  crypto/Allium/Lyra2RE.h \
+  crypto/Allium/Allium.c \
+  crypto/Allium/Allium.h \
   crypto/Allium/Lyra2.c \
   crypto/Allium/Lyra2.h \
   crypto/Allium/Sponge.c \

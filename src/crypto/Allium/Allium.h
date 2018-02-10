@@ -1,5 +1,5 @@
-#ifndef LYRA2RE_H
-#define LYRA2RE_H
+#ifndef ALLIUM_H
+#define ALLIUM_H
 
 #ifdef __cplusplus
 extern "C" {

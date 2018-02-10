@@ -27,7 +27,7 @@
  * online backup system.
  */
 
-#include "Lyra2RE.h"
+#include "Allium.h"
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
