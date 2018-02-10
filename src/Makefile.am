@@ -269,6 +269,8 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/sha256.h \
   crypto/sha512.cpp \
   crypto/sha512.h \
+  crypto/blake2s/blake2s.c \
+  crypto/blake2s/blake2s.h \
   crypto/Lyra2RE/Lyra2RE.c \
   crypto/Lyra2RE/Lyra2RE.h \
   crypto/Lyra2RE/Lyra2.c \
