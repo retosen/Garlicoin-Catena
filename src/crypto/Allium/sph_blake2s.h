@@ -112,7 +112,7 @@ typedef struct __blake2s_param
 	uint8_t  personal[BLAKE2S_PERSONALBYTES];  // 32
 } blake2s_param;
 
-ALIGN( 64 ) typedef struct __blake2s_state
+/*ALIGN( 64 ) typedef struct __blake2s_state
 {
 	uint32_t h[8];
 	uint32_t t[2];
@@ -120,21 +120,31 @@ ALIGN( 64 ) typedef struct __blake2s_state
 	uint8_t  buf[2 * BLAKE2S_BLOCKBYTES];
 	size_t   buflen;
 	uint8_t  last_node;
-} blake2s_state;
+} blake2s_state;*/
 #pragma pack(pop)
 
 #if defined(__cplusplus)
 extern "C" {
 #endif
 
-	int blake2s_compress( blake2s_state *S, const uint8_t block[BLAKE2S_BLOCKBYTES] );
+  ALIGN( 64 ) typedef struct __blake2s_state
+  {
+	  uint32_t h[8];
+	  uint32_t t[2];
+	  uint32_t f[2];
+	  uint8_t  buf[2 * BLAKE2S_BLOCKBYTES];
+	  size_t   buflen;
+	  uint8_t  last_node;
+  } sph_blake2s_context;
+
+	int sph_blake2s_compress( blake2s_state *S, const uint8_t block[BLAKE2S_BLOCKBYTES] );
 
 	// Streaming API
-	int blake2s_init( blake2s_state *S, const uint8_t outlen );
-	int blake2s_init_key( blake2s_state *S, const uint8_t outlen, const void *key, const uint8_t keylen );
-	int blake2s_init_param( blake2s_state *S, const blake2s_param *P );
-	int blake2s_update( blake2s_state *S, const uint8_t *in, uint64_t inlen );
-	int blake2s_final( blake2s_state *S, uint8_t *out, uint8_t outlen );
+	int sph_blake2s_init( blake2s_state *S, const uint8_t outlen );
+	int sph_blake2s_init_key( blake2s_state *S, const uint8_t outlen, const void *key, const uint8_t keylen );
+	int sph_blake2s_init_param( blake2s_state *S, const blake2s_param *P );
+	int sph_blake2s_update( blake2s_state *S, const uint8_t *in, uint64_t inlen );
+	int sph_blake2s_final( blake2s_state *S, uint8_t *out, uint8_t outlen );
 
 	// Simple API
 	int blake2s( uint8_t *out, const void *in, const void *key, const uint8_t outlen, const uint64_t inlen, uint8_t keylen );
