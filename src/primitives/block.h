@@ -12,6 +12,7 @@
 
 #include "crypto/scrypt.h"
 #include "crypto/Lyra2RE/Lyra2RE.h"
+#include "crypto/blake2s/blake2s.h"
 
 /** Nodes collect new transactions into a block, hash them into a hash tree,
  * and scan through nonce values to make the block's hash satisfy proof-of-work
@@ -65,7 +66,7 @@ public:
 
     uint256 GetHash() const;
 
-    uint256 GetPoWHash(int nHeight) const;
+    uint256 GetPoWHash(bool bLyra2REv2 = false) const;
 
     int64_t GetBlockTime() const
     {
