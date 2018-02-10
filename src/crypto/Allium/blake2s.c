@@ -20,7 +20,7 @@
 extern "C" {
 #endif
 
-#include "crypto/Lyra2RE/sph_types.h"
+#include "crypto/Allium/sph_types.h"
 #include "blake2s.h"
 
 static const uint32_t blake2s_IV[8] =

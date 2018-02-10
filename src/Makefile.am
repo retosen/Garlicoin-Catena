@@ -271,24 +271,24 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/sha512.h \
   crypto/blake2s/blake2s.c \
   crypto/blake2s/blake2s.h \
-  crypto/Lyra2RE/Lyra2RE.c \
-  crypto/Lyra2RE/Lyra2RE.h \
-  crypto/Lyra2RE/Lyra2.c \
-  crypto/Lyra2RE/Lyra2.h \
-  crypto/Lyra2RE/Sponge.c \
-  crypto/Lyra2RE/Sponge.h \
-  crypto/Lyra2RE/blake.c \
-  crypto/Lyra2RE/blake.h \
-  crypto/Lyra2RE/groestl.c \
-  crypto/Lyra2RE/groestl.h \
-  crypto/Lyra2RE/keccak.c \
-  crypto/Lyra2RE/keccak.h \
-  crypto/Lyra2RE/skein.c \
-  crypto/Lyra2RE/skein.h \
-  crypto/Lyra2RE/cubehash.c \
-  crypto/Lyra2RE/cubehash.h \
-  crypto/Lyra2RE/bmw.c \
-  crypto/Lyra2RE/bmw.h
+  crypto/Allium/Lyra2RE.c \
+  crypto/Allium/Lyra2RE.h \
+  crypto/Allium/Lyra2.c \
+  crypto/Allium/Lyra2.h \
+  crypto/Allium/Sponge.c \
+  crypto/Allium/Sponge.h \
+  crypto/Allium/blake.c \
+  crypto/Allium/blake.h \
+  crypto/Allium/groestl.c \
+  crypto/Allium/groestl.h \
+  crypto/Allium/keccak.c \
+  crypto/Allium/keccak.h \
+  crypto/Allium/skein.c \
+  crypto/Allium/skein.h \
+  crypto/Allium/cubehash.c \
+  crypto/Allium/cubehash.h \
+  crypto/Allium/bmw.c \
+  crypto/Allium/bmw.h
 
 if EXPERIMENTAL_ASM
 crypto_libbitcoin_crypto_a_SOURCES += crypto/sha256_sse4.cpp
