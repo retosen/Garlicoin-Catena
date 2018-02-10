@@ -32,7 +32,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "crypto/Lyra2RE/Lyra2.h"
-#include "crypto/blake2s/blake2s.h"
+#include "crypto/blake2s/blake2.h"
 
 
 void garlicrypt_hash(const char* input, char* output)
@@ -40,7 +40,7 @@ void garlicrypt_hash(const char* input, char* output)
 	uint32_t hashA[8], hashB[8];
 	
     LYRA2(hashA, 80, input, 80, input, 80, 1, 4, 4);
-    blake2s_simple(hashB, hashA, 80);
+    blake2s(hashB, 32, hashA, 80, hashA, 80);
     
    	memcpy(output, hashB, 32);
 }

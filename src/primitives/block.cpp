@@ -10,35 +10,27 @@
 #include "utilstrencodings.h"
 #include "crypto/common.h"
 #include "chainparams.h"
+#include "crypto/garlicrypt/garlicrypt.h"
+#include "crypto/Lyra2RE/Lyra2RE.h"
 
 uint256 CBlockHeader::GetHash() const
 {
     return SerializeHash(*this);
 }
 
-uint256 CBlockHeader::GetPoWHash(bool bLyra2REv2) const
+uint256 CBlockHeader::GetPoWHash(int nAlgo) const
 {
     uint256 thash;
-    if (bLyra2REv2)
-    {
-        // lyra2re2_hash(BEGIN(nVersion), BEGIN(thash));
-        garlicrypt_hash(BEGIN(nVersion), BEGIN(thash));
-    //   int blake2s( uint8_t *out, const void *in, const void *key, const uint8_t outlen, const uint64_t inlen, uint8_t keylen )
-        // uint256 hashA;
-        // blake2s_state ctx_blake;
-        // blake2s_init(&ctx_blake, 32);
-        // blake2s_update(&ctx_blake, thash, 80);
-        // blake2s_final(&ctx_blake, hashA);	
-
-        // int blake2s( uint8_t *out, const void *in, const void *key, const uint8_t outlen, const uint64_t inlen, uint8_t keylen );
-
-        // blake2s_simple(hashA, thash, 32);
-
-        return thash;
-    }
-    else
-    {
-        scrypt_N_1_1_256(BEGIN(nVersion), BEGIN(thash), 10);
+    switch(nAlgo){
+        case 0:
+            scrypt_N_1_1_256(BEGIN(nVersion), BEGIN(thash), 10);
+            break;
+        case 1:
+            lyra2re2_hash(BEGIN(nVersion), BEGIN(thash));
+            break;
+        case 2:
+            garlicrypt_hash(BEGIN(nVersion), BEGIN(thash));
+            break;
     }
     return thash;
 }
