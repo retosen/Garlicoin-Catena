@@ -19,7 +19,7 @@ uint256 CBlockHeader::GetHash() const
 uint256 CBlockHeader::GetPoWHash(int nHeight) const
 {
     uint256 thash;
-    if (Params().NetworkIDString() == CBaseChainParams::TESTNET)
+    if (Params().strNetworkID() == CBaseChainParams::TESTNET)
     {
         Allium_hash(BEGIN(nVersion), BEGIN(thash));
         return thash;
