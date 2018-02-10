@@ -82,8 +82,12 @@ public:
         if(strNetworkID == CBaseChainParams::TESTNET){
             if(nHeight > 1950){
                 return 2;
-            }else if(nHeight > 1000){
+            }
+            else if(nHeight > 1000){
                 return 1;
+            }
+            else {
+              return 0;
             }
         }else{
             return 0;
