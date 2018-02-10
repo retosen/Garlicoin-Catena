@@ -9,23 +9,28 @@
 #include "tinyformat.h"
 #include "utilstrencodings.h"
 #include "crypto/common.h"
-#include "../chainparams.h"
+#include "chainparams.h"
+#include "crypto/garlicrypt/garlicrypt.h"
+#include "crypto/Lyra2RE/Lyra2RE.h"
 
 uint256 CBlockHeader::GetHash() const
 {
     return SerializeHash(*this);
 }
 
-uint256 CBlockHeader::GetPoWHash(int nHeight) const
+uint256 CBlockHeader::GetPoWHash(int nAlgo) const
 {
     uint256 thash;
-    if (Params().NetworkIDString() == CBaseChainParams::TESTNET && nHeight > 1000)
-    {
-      lyra2re2_hash(BEGIN(nVersion), BEGIN(thash));
-    }
-    else
-    {
-      scrypt_N_1_1_256(BEGIN(nVersion), BEGIN(thash), 10);
+    switch(nAlgo){
+        case 0:
+            scrypt_N_1_1_256(BEGIN(nVersion), BEGIN(thash), 10);
+            break;
+        case 1:
+            lyra2re2_hash(BEGIN(nVersion), BEGIN(thash));
+            break;
+        case 2:
+            garlicrypt_hash(BEGIN(nVersion), BEGIN(thash));
+            break;
     }
     return thash;
 }

@@ -78,6 +78,17 @@ public:
     const CCheckpointData& Checkpoints() const { return checkpointData; }
     const ChainTxData& TxData() const { return chainTxData; }
     void UpdateVersionBitsParameters(Consensus::DeploymentPos d, int64_t nStartTime, int64_t nTimeout);
+    int SwitchAllium(int nHeight) const {
+        if(strNetworkID == CBaseChainParams::TESTNET){
+            if(nHeight > 1950){
+                return 2;
+            }else if(nHeight > 1000){
+                return 1;
+            }
+        }else{
+            return 0;
+        }
+    }
 protected:
     CChainParams() {}
 
