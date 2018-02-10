@@ -16,24 +16,13 @@ uint256 CBlockHeader::GetHash() const
     return SerializeHash(*this);
 }
 
-uint256 CBlockHeader::GetPoWHash(bool bLyra2REv2) const
+uint256 CBlockHeader::GetPoWHash(int nHeight) const
 {
     uint256 thash;
-    if (bLyra2REv2)
+    if (Params().NetworkIDString() == CBaseChainParams::TESTNET)
     {
-        lyra2re2_hash(BEGIN(nVersion), BEGIN(thash));
-    //   int blake2s( uint8_t *out, const void *in, const void *key, const uint8_t outlen, const uint64_t inlen, uint8_t keylen )
-        uint256 hashA;
-        // blake2s_state ctx_blake;
-        // blake2s_init(&ctx_blake, 32);
-        // blake2s_update(&ctx_blake, thash, 80);
-        // blake2s_final(&ctx_blake, hashA);	
-
-        // int blake2s( uint8_t *out, const void *in, const void *key, const uint8_t outlen, const uint64_t inlen, uint8_t keylen );
-
-        blake2s_simple(hashA, thash, 32);
-
-        return hashA;
+        Allium_hash(BEGIN(nVersion), BEGIN(thash));
+        return thash;
     }
     else
     {
