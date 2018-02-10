@@ -269,8 +269,6 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/sha256.h \
   crypto/sha512.cpp \
   crypto/sha512.h \
-  crypto/blake2s/blake2s.c \
-  crypto/blake2s/blake2s.h \
   crypto/Allium/Allium.c \
   crypto/Allium/Allium.h \
   crypto/Allium/Lyra2.c \
@@ -288,7 +286,9 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/Allium/cubehash.c \
   crypto/Allium/cubehash.h \
   crypto/Allium/bmw.c \
-  crypto/Allium/bmw.h
+  crypto/Allium/bmw.h \
+	crypto/Allium/blake2s.c \
+	crypto/Allium/blake2s.h
 
 if EXPERIMENTAL_ASM
 crypto_libbitcoin_crypto_a_SOURCES += crypto/sha256_sse4.cpp

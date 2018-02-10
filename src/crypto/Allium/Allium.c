@@ -49,9 +49,9 @@ void allium_hash(const char* input, char* output)
 
   LYRA2(hashA, 80, input, 80, input, 80, 1, 4, 4);
 
-  sph_blake2s_init(&ctx_blake2s);
+  sph_blake2s_init(&ctx_blake2s, 80);
   sph_blake2s_update(&ctx_blake2s, hashA, 32);
-  sph_blake2s_final(&ctx_blake2s, hashB)
+  sph_blake2s_final(&ctx_blake2s, hashB, 32);
 
   memcpy(output, hashB, 32);
 }

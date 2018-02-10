@@ -14,6 +14,10 @@
 #ifndef SPH_BLAKE2_H__
 #define SPH_BLAKE2_H__
 
+#ifdef __cplusplus
+extern "C"{
+#endif
+
 #include <stddef.h>
 #include <stdint.h>
 
@@ -121,11 +125,11 @@ typedef struct __blake2s_param
 	size_t   buflen;
 	uint8_t  last_node;
 } blake2s_state;*/
-#pragma pack(pop)
+//#pragma pack(pop)
 
-#if defined(__cplusplus)
+/*#if defined(__cplusplus)
 extern "C" {
-#endif
+#endif*/
 
   ALIGN( 64 ) typedef struct __blake2s_state
   {
@@ -136,15 +140,16 @@ extern "C" {
 	  size_t   buflen;
 	  uint8_t  last_node;
   } sph_blake2s_context;
+  #pragma pack(pop)
 
-	int sph_blake2s_compress( blake2s_state *S, const uint8_t block[BLAKE2S_BLOCKBYTES] );
+	int sph_blake2s_compress( sph_blake2s_context *S, const uint8_t block[BLAKE2S_BLOCKBYTES] );
 
 	// Streaming API
-	int sph_blake2s_init( blake2s_state *S, const uint8_t outlen );
-	int sph_blake2s_init_key( blake2s_state *S, const uint8_t outlen, const void *key, const uint8_t keylen );
-	int sph_blake2s_init_param( blake2s_state *S, const blake2s_param *P );
-	int sph_blake2s_update( blake2s_state *S, const uint8_t *in, uint64_t inlen );
-	int sph_blake2s_final( blake2s_state *S, uint8_t *out, uint8_t outlen );
+	int sph_blake2s_init( sph_blake2s_context *S, const uint8_t outlen );
+	int sph_blake2s_init_key( sph_blake2s_context *S, const uint8_t outlen, const void *key, const uint8_t keylen );
+	int sph_blake2s_init_param( sph_blake2s_context *S, const blake2s_param *P );
+	int sph_blake2s_update( sph_blake2s_context *S, const uint8_t *in, uint64_t inlen );
+	int sph_blake2s_final( sph_blake2s_context *S, uint8_t *out, uint8_t outlen );
 
 	// Simple API
 	int blake2s( uint8_t *out, const void *in, const void *key, const uint8_t outlen, const uint64_t inlen, uint8_t keylen );

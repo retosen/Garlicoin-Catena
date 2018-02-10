@@ -19,9 +19,9 @@ uint256 CBlockHeader::GetHash() const
 uint256 CBlockHeader::GetPoWHash(int nHeight) const
 {
     uint256 thash;
-    if (Params().strNetworkID() == "main")
+    if (Params().NetworkIDString() == "main")
     {
-        Allium_hash(BEGIN(nVersion), BEGIN(thash));
+        allium_hash(BEGIN(nVersion), BEGIN(thash));
         return thash;
     }
     else
