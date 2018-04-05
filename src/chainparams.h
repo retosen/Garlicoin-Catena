@@ -79,8 +79,8 @@ public:
     const ChainTxData& TxData() const { return chainTxData; }
     void UpdateVersionBitsParameters(Consensus::DeploymentPos d, int64_t nStartTime, int64_t nTimeout);
     int SwitchAllium(int nHeight) const {
-        if(strNetworkID == CBaseChainParams::TESTNET){
-            if(nHeight > 1950){
+        /*if(strNetworkID == CBaseChainParams::TESTNET){
+            if(nHeight > 1951){
                 return 2;
             }
             else if(nHeight > 1000){
@@ -90,8 +90,13 @@ public:
               return 0;
             }
         }else{
-            return 0;
+            return 1;
+        }*/
+        if (nHeight == 0)
+        {
+          return 0;
         }
+        return 2;
     }
 protected:
     CChainParams() {}

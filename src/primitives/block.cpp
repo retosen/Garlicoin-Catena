@@ -32,6 +32,7 @@ uint256 CBlockHeader::GetPoWHash(int nAlgo) const
             garlicrypt_hash(BEGIN(nVersion), BEGIN(thash));
             break;
     }
+    printf("%x\n", thash);
     return thash;
 }
 
