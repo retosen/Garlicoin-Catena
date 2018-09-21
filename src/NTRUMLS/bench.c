@@ -111,6 +111,7 @@ bench_param_set(PQ_PARAM_SET_ID id)
     pq_gen_key(P, &privkey_blob_len, privkey_blob,
                &pubkey_blob_len, pubkey_blob);
   }
+
   c1 = clock();
   printf("Time/key: %fs\n", (float) (c1 - c0)/(TRIALS*CLOCKS_PER_SEC));
 
@@ -155,4 +156,3 @@ bench_param_set(PQ_PARAM_SET_ID id)
 
   return EXIT_SUCCESS;
 }
-
