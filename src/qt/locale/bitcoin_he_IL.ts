@@ -3,7 +3,7 @@
     <name>AddressBookPage</name>
     <message>
         <source>Right-click to edit address or label</source>
-        <translation>קליק ימני כדי לערוך כתובת או תווית</translation>
+        <translation>קליל ימני כדי לערוך כתובת או תווית</translation>
     </message>
     <message>
         <source>Create a new address</source>
@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>חדש</translation>
+        <translation>וחדש</translation>
     </message>
     <message>
         <source>Copy the currently selected address to the system clipboard</source>
@@ -19,11 +19,11 @@
     </message>
     <message>
         <source>&amp;Copy</source>
-        <translation>העתק</translation>
+        <translation>והעתק</translation>
     </message>
     <message>
         <source>C&amp;lose</source>
-        <translation>סגור</translation>
+        <translation>וסגור</translation>
     </message>
     <message>
         <source>Delete the currently selected address from the list</source>
@@ -63,11 +63,11 @@
     </message>
     <message>
         <source>These are your Garlicoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>אלו הן כתובות לייטקוין שלך לשליחת תשלומים. תמיד בדוק את כתובת הארנק המקבל לפני שליחת מטבעות</translation>
+        <translation>אלו הן כתובות הלייטקוין שלך לשליחת תשלומים. תמיד בדוק את כתובת הארנק המקבל לפני שליחת מטבעות</translation>
     </message>
     <message>
         <source>These are your Garlicoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>אלו הן כתובות לייטקוין שלך לקבלת תשלומים. מומלץ להשתמש בכתובת חדשה בכל העברת מטבעות</translation>
+        <translation>אלו הן כתובות הלייטקוין שלך לקבלת תשלומים. מומלץ להשתמש בכתובת חדשה בכל העברת מטבעות</translation>
     </message>
     </context>
 <context>
@@ -92,6 +92,14 @@
     </context>
 <context>
     <name>CoinControlDialog</name>
+    <message>
+        <source>Copy amount</source>
+        <translation>העתק סכום</translation>
+    </message>
+    <message>
+        <source>Copy quantity</source>
+        <translation>העתק כמות</translation>
+    </message>
     </context>
 <context>
     <name>EditAddressDialog</name>
@@ -104,6 +112,10 @@
     </context>
 <context>
     <name>Intro</name>
+    <message>
+        <source>Garlicoin</source>
+        <translation>לייטקוין</translation>
+    </message>
     </context>
 <context>
     <name>ModalOverlay</name>
@@ -137,7 +149,11 @@
     </context>
 <context>
     <name>ReceiveCoinsDialog</name>
-    </context>
+    <message>
+        <source>Copy amount</source>
+        <translation>העתק סכום</translation>
+    </message>
+</context>
 <context>
     <name>ReceiveRequestDialog</name>
     </context>
@@ -146,6 +162,14 @@
     </context>
 <context>
     <name>SendCoinsDialog</name>
+    <message>
+        <source>Copy quantity</source>
+        <translation>העתק כמות</translation>
+    </message>
+    <message>
+        <source>Copy amount</source>
+        <translation>העתק סכום</translation>
+    </message>
     </context>
 <context>
     <name>SendCoinsEntry</name>
@@ -176,6 +200,10 @@
     </context>
 <context>
     <name>TransactionView</name>
+    <message>
+        <source>Copy amount</source>
+        <translation>העתק סכום</translation>
+    </message>
     </context>
 <context>
     <name>UnitDisplayStatusBarControl</name>

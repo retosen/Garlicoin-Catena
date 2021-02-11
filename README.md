@@ -1,22 +1,4 @@
 Garlicoin Core integration/staging tree
-=====================================
-
-[![Build Status](https://travis-ci.org/GarlicoinOrg/Garlicoin.svg?branch=master)](https://travis-ci.org/GarlicoinOrg/Garlicoin)
-
-http://garlicoin.io
-
-What is Garlicoin?
-----------------
-
-Garlicoin is an experimental digital currency that enables instant payments to
-anyone, anywhere in the world. Garlicoin uses peer-to-peer technology to operate
-with no central authority: managing transactions and issuing money are carried
-out collectively by the network. Garlicoin Core is the name of open source
-software which enables the use of this currency.
-
-For more information, as well as an immediately useable, binary version of
-the Garlicoin Core software, see 
-[http://garlicoin.io](http://garlicoin.io).
 
 License
 -------

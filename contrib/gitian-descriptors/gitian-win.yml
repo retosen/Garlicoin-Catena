@@ -1,5 +1,5 @@
 ---
-name: "garlicoin-win-0.15"
+name: "garlicoin-win-0.17"
 enable_cache: true
 suites:
 - "trusty"
@@ -22,7 +22,7 @@ packages:
 - "ca-certificates"
 - "python"
 remotes:
-- "url": "https://github.com/garlicoin-project/garlicoin.git"
+- "url": "https://github.com/GarlicoinOrg/garlicoin.git"
   "dir": "garlicoin"
 files: []
 script: |

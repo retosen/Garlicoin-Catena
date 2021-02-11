@@ -1,23 +1,13 @@
 TOR SUPPORT IN GARLICOIN
-======================
-
-It is possible to run Garlicoin as a Tor hidden service, and connect to such services.
 
 The following directions assume you have a Tor proxy running on port 9050. Many distributions default to having a SOCKS proxy listening on port 9050, but others may not. In particular, the Tor Browser Bundle defaults to listening on port 9150. See [Tor Project FAQ:TBBSocksPort](https://www.torproject.org/docs/faq.html.en#TBBSocksPort) for how to properly
 configure Tor.
 
 
-1. Run garlicoin behind a Tor proxy
 ---------------------------------
 
 The first step is running Garlicoin behind a Tor proxy. This will already make all
 outgoing connections be anonymized, but more is possible.
-
-	-proxy=ip:port  Set the proxy server. If SOCKS5 is selected (default), this proxy
-	                server will be used to try to reach .onion addresses as well.
-
-	-onion=ip:port  Set the proxy server to use for tor hidden services. You do not
-	                need to set this if it's the same as -proxy. You can use -noonion
 	                to explicitly disable access to hidden service.
 
 	-listen         When using -proxy, listening is disabled by default. If you want

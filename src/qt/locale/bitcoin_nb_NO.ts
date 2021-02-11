@@ -168,8 +168,8 @@
         <translation>Bekreft kryptering av lommeboken</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR GARLICOINS&lt;/b&gt;!</source>
-        <translation>Advarsel: Dersom du krypterer lommeboken og mister passordsetningen vil du &lt;b&gt;MISTE ALLE DINE GARLICOIN&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR LITECOINS&lt;/b&gt;!</source>
+        <translation>Advarsel: Dersom du krypterer lommeboken og mister passordsetningen vil du &lt;b&gt;MISTE ALLE DINE LITECOIN&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -180,7 +180,7 @@
         <translation>Lommeboken er kryptert</translation>
     </message>
     <message>
-        <source>%1 will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your garlicoins from being stolen by malware infecting your computer.</source>
+        <source>%1 will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your litecoins from being stolen by malware infecting your computer.</source>
         <translation>%1 vil nå lukkes for å fullføre krypteringsprosessen. Husk at å kryptere lommeboken ikke kan beskytte dine garlicoin fullstendig fra å bli stjålet av skadelig programvare som har infisert datamaskinen din.</translation>
     </message>
     <message>
@@ -189,7 +189,7 @@
     </message>
     <message>
         <source>Wallet encryption failed</source>
-        <translation>Lommebokkrypteringen feilet</translation>
+        <translation>Kryptering av lommeboken feilet</translation>
     </message>
     <message>
         <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
@@ -287,7 +287,7 @@
     </message>
     <message>
         <source>&amp;Options...</source>
-        <translation>&amp;Valg</translation>
+        <translation>&amp;Alternativer</translation>
     </message>
     <message>
         <source>Modify configuration options for %1</source>
@@ -403,7 +403,7 @@
     </message>
     <message>
         <source>&amp;Settings</source>
-        <translation>In&amp;stillinger</translation>
+        <translation>Inn&amp;stillinger</translation>
     </message>
     <message>
         <source>&amp;Help</source>
@@ -412,6 +412,108 @@
     <message>
         <source>Tabs toolbar</source>
         <translation>Hjelpelinje for fliker</translation>
+    </message>
+    <message>
+        <source>Request payments (generates QR codes and garlicoin: URIs)</source>
+        <translation>Be om betalinger (genererer QR-koder og garlicoin-URIer)</translation>
+    </message>
+    <message>
+        <source>Show the list of used sending addresses and labels</source>
+        <translation>Vis lista over brukte sendeadresser og merkelapper</translation>
+    </message>
+    <message>
+        <source>Show the list of used receiving addresses and labels</source>
+        <translation>Vis lista over brukte mottakeradresser og merkelapper</translation>
+    </message>
+    <message>
+        <source>Open a garlicoin: URI or payment request</source>
+        <translation>Åpne en garlicoin: URI eller betalingsforespørsel</translation>
+    </message>
+    <message>
+        <source>&amp;Command-line options</source>
+        <translation>&amp;Kommandolinjealternativer</translation>
+    </message>
+    <message>
+        <source>Processing blocks on disk...</source>
+        <translation>Behandler blokker på disken…</translation>
+    </message>
+    <message>
+        <source>%1 behind</source>
+        <translation>%1 bak</translation>
+    </message>
+    <message>
+        <source>Last received block was generated %1 ago.</source>
+        <translation>Siste mottatte blokk ble generert for %1 siden.</translation>
+    </message>
+    <message>
+        <source>Transactions after this will not yet be visible.</source>
+        <translation>Transaksjoner etter dette vil ikke være synlige ennå.</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Feilmelding</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>Advarsel</translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation>Informasjon</translation>
+    </message>
+    <message>
+        <source>Up to date</source>
+        <translation>Oppdatert</translation>
+    </message>
+    <message>
+        <source>Show the %1 help message to get a list with possible Garlicoin command-line options</source>
+        <translation>Vis %1-hjelpemeldingen for å få en liste over mulige Garlicoin-kommandolinjealternativer</translation>
+    </message>
+    <message>
+        <source>%1 client</source>
+        <translation>%1-klient</translation>
+    </message>
+    <message>
+        <source>Catching up...</source>
+        <translation>Tar igjen…</translation>
+    </message>
+    <message>
+        <source>Date: %1
+</source>
+        <translation>Dato: %1
+</translation>
+    </message>
+    <message>
+        <source>Amount: %1
+</source>
+        <translation>Mengde: %1
+</translation>
+    </message>
+    <message>
+        <source>Type: %1
+</source>
+        <translation>Type: %1
+</translation>
+    </message>
+    <message>
+        <source>Label: %1
+</source>
+        <translation>Merkelapp: %1
+</translation>
+    </message>
+    <message>
+        <source>Address: %1
+</source>
+        <translation>Adresse: %1
+</translation>
+    </message>
+    <message>
+        <source>Sent transaction</source>
+        <translation>Sendt transaksjon</translation>
+    </message>
+    <message>
+        <source>Incoming transaction</source>
+        <translation>Innkommende transaksjon</translation>
     </message>
     </context>
 <context>
@@ -432,6 +534,14 @@
     </context>
 <context>
     <name>Intro</name>
+    <message>
+        <source>Garlicoin</source>
+        <translation>Garlicoin</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Feilmelding</translation>
+    </message>
     </context>
 <context>
     <name>ModalOverlay</name>
@@ -441,6 +551,10 @@
     </context>
 <context>
     <name>OptionsDialog</name>
+    <message>
+        <source>Error</source>
+        <translation>Feilmelding</translation>
+    </message>
     </context>
 <context>
     <name>OverviewPage</name>
@@ -571,5 +685,17 @@
     </context>
 <context>
     <name>bitcoin-core</name>
-    </context>
+    <message>
+        <source>Information</source>
+        <translation>Informasjon</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>Advarsel</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Feilmelding</translation>
+    </message>
+</context>
 </TS>

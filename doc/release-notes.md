@@ -29,20 +29,16 @@ downgrade from version 0.15.0 or upgrade to version 0.15.0 will cause all fee
 estimates to be discarded.
 
 Note that the block database format also changed in version 0.8.0 and there is no
-automatic upgrade code from before version 0.8 to version 0.15.0. Upgrading
-directly from 0.7.x and earlier without redownloading the blockchain is not supported.
+automatic upgrade code from before version 0.8 to version 0.15.0 or higher. Upgrading
+directly from 0.7.x and earlier without re-downloading the blockchain is not supported.
 However, as usual, old wallet versions are still supported.
 
 Downgrading warning
 -------------------
 
-The chainstate database for this release is not compatible with previous
-releases, so if you run 0.15 and then decide to switch back to any
-older version, you will need to run the old release with the `-reindex-chainstate`
-option to rebuild the chainstate data structures in the old format.
-
-If your node has pruning enabled, this will entail re-downloading and
-processing the entire blockchain.
+Wallets created in 0.16 and later are not compatible with versions prior to 0.16
+and will not work if you try to use newly created wallets in older versions. Existing
+wallets that were created with older versions are not affected by this.
 
 Compatibility
 ==============
@@ -64,11 +60,6 @@ fee setting was configured that no longer exists in the GUI. This is a minimal
 patch to avoid this issue from occuring.
 
 0.16.0.1 Change log
-====================
-
--  #11332 `46c8d23` Fix possible crash with invalid nCustomFeeRadio in QSettings (achow101, TheBlueMatt)
-
-Also the manpages were updated, as this was forgotten for 0.15.0.
 
 Credits
 =======

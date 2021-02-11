@@ -12,9 +12,13 @@
 * fee_estimates.dat: stores statistics used to estimate minimum transaction fees and priorities required for confirmation; since 0.10.0
 * mempool.dat: dump of the mempool's transactions; since 0.14.0.
 * peers.dat: peer IP address database (custom format); since 0.7.0
-* wallet.dat: personal wallet (BDB) with keys and transactions
+* wallet.dat: personal wallet (BDB) with keys and transactions; moved to wallets/ directory on new installs since 0.17.0
+* wallets/database/*: BDB database environment; used for wallets since 0.17.0
+* wallets/db.log: wallet database log file; since 0.17.0
+* wallets/wallet.dat: personal wallet (BDB) with keys and transactions; since 0.17.0
 * .cookie: session RPC authentication cookie (written at start when cookie authentication is used, deleted on shutdown): since 0.12.0
 * onion_private_key: cached Tor hidden service private key for `-listenonion`: since 0.12.0
+* guisettings.ini.bak: backup of former GUI settings after `-resetguisettings` is used
 
 Only used in pre-0.8.0
 ---------------------

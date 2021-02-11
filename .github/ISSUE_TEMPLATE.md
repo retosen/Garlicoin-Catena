@@ -1,27 +1,19 @@
-<!--- Remove sections that do not apply -->
+<!-- This issue tracker is only for technical issues related to Garlicoin Core.
 
 This issue tracker is only for technical issues related to garlicoin-core.
 
-General garlicoin questions and/or support requests and are best directed to the [garlicointalk.io forums](https://garlicointalk.io/).
+General garlicoin questions and/or support requests and are best directed to the [garlicoin subreddit](https://www.reddit.com/r/garlicoin/) or [garlicoin discord server](https://discord.gg/garlicoin).
 
-For reporting security issues, please contact the Garlicoin developers on the #garlicoin-dev Freenode IRC channel or alternatively you can email us at contact@garlicoin.org.
+<!-- Describe the issue -->
+<!--- What behavior did you expect? -->
 
-### Describe the issue
+<!--- What was the actual behavior (provide screenshots if the issue is GUI-related)? -->
 
-### Can you reliably reproduce the issue?
-#### If so, please list the steps to reproduce below:
-1.
-2.
-3.
+<!--- How reliably can you reproduce the issue, what are the steps to do so? -->
 
-### Expected behaviour
-Tell us what should happen
+<!-- What version of Garlicoin Core are you using, where did you get it (website, self-compiled, etc)? -->
 
-### Actual behaviour
-Tell us what happens instead
-
-### Screenshots.
-If the issue is related to the GUI, screenshots can be added to this issue via drag & drop.
+<!-- What type of machine are you observing the error on (OS/CPU and disk type)? -->
 
 ### What version of garlicoin-core are you using?
 List the version number/commit ID, and if it is an official binary, self compiled or a distribution package such as PPA.

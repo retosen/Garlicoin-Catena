@@ -1,5 +1,5 @@
 ---
-name: "garlicoin-osx-0.15"
+name: "garlicoin-osx-0.17"
 enable_cache: true
 suites:
 - "trusty"
@@ -28,7 +28,7 @@ packages:
 - "python-setuptools"
 - "fonts-tuffy"
 remotes:
-- "url": "https://github.com/garlicoin-project/garlicoin.git"
+- "url": "https://github.com/GarlicoinOrg/Garlicoin.git"
   "dir": "garlicoin"
 files:
 - "MacOSX10.11.sdk.tar.gz"

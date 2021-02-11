@@ -32,6 +32,10 @@
     </context>
 <context>
     <name>Intro</name>
+    <message>
+        <source>Garlicoin</source>
+        <translation>Garlicoin</translation>
+    </message>
     </context>
 <context>
     <name>ModalOverlay</name>

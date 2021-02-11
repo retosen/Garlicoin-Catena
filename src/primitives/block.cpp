@@ -1,31 +1,33 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2009-2017 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "primitives/block.h"
+#include <primitives/block.h>
 
-#include "hash.h"
-#include "tinyformat.h"
-#include "utilstrencodings.h"
-#include "crypto/common.h"
-#include "../chainparams.h"
+#include <hash.h>
+#include <tinyformat.h>
+#include <utilstrencodings.h>
+#include <crypto/common.h>
+#include <crypto/scrypt.h>
+#include <chainparams.h>
+#include <crypto/allium/allium.h>
 
 uint256 CBlockHeader::GetHash() const
 {
     return SerializeHash(*this);
 }
 
-uint256 CBlockHeader::GetPoWHash(int nHeight) const
+uint256 CBlockHeader::GetPoWHash(int nAlgo) const
 {
     uint256 thash;
-    if (Params().NetworkIDString() == CBaseChainParams::TESTNET && nHeight > 1000)
-    {
-      lyra2re2_hash(BEGIN(nVersion), BEGIN(thash));
-    }
-    else
-    {
-      scrypt_N_1_1_256(BEGIN(nVersion), BEGIN(thash), 10);
+    switch(nAlgo){
+        case CChainParams::ALGO_SCRYPT :
+            scrypt_N_1_1_256(BEGIN(nVersion), BEGIN(thash), 10);
+            break;
+        case CChainParams::ALGO_ALLIUM :
+            allium_hash(BEGIN(nVersion), BEGIN(thash));
+            break;
     }
     return thash;
 }

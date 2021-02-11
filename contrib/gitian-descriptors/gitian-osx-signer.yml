@@ -7,7 +7,7 @@ architectures:
 packages:
 - "faketime"
 remotes:
-- "url": "https://github.com/garlicoin-project/garlicoin-detached-sigs.git"
+- "url": "https://github.com/GarlicoinOrg/garlicoin-detached-sigs.git"
   "dir": "signature"
 files:
 - "garlicoin-osx-unsigned.tar.gz"

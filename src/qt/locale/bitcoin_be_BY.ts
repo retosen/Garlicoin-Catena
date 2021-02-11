@@ -168,7 +168,7 @@
         <translation>Пацвердзіце шыфраванне гаманца</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR GARLICOINS&lt;/b&gt;!</source>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR LITECOINS&lt;/b&gt;!</source>
         <translation>Увага: калі вы зашыфруеце свой гаманец і страціце парольную фразу, то &lt;b&gt;СТРАЦІЦЕ ЎСЕ СВАЕ БІТКОЙНЫ&lt;/b&gt;!</translation>
     </message>
     <message>
@@ -675,6 +675,10 @@
         <translation>Вітаем</translation>
     </message>
     <message>
+        <source>Garlicoin</source>
+        <translation>Garlicoin</translation>
+    </message>
+    <message>
         <source>Error</source>
         <translation>Памылка</translation>
     </message>
@@ -707,6 +711,10 @@
         <source>W&amp;allet</source>
         <translation>Гаманец</translation>
     </message>
+    <message>
+        <source>Error</source>
+        <translation>Памылка</translation>
+    </message>
     </context>
 <context>
     <name>OverviewPage</name>
@@ -731,7 +739,11 @@
         <source>%1 and %2</source>
         <translation>%1 і %2</translation>
     </message>
-    </context>
+    <message>
+        <source>unknown</source>
+        <translation>невядома</translation>
+    </message>
+</context>
 <context>
     <name>QObject::QObject</name>
     </context>
@@ -1147,10 +1159,6 @@
         <translation>Іншыя</translation>
     </message>
     <message>
-        <source>Enter address or label to search</source>
-        <translation>Увядзіце адрас ці пазнаку для пошуку</translation>
-    </message>
-    <message>
         <source>Min amount</source>
         <translation>Мін. колькасць</translation>
     </message>
@@ -1227,7 +1235,7 @@
         <source>Send Coins</source>
         <translation>Даслаць Манеты</translation>
     </message>
-</context>
+    </context>
 <context>
     <name>WalletView</name>
     <message>
@@ -1302,10 +1310,6 @@
         <translation>Праверка блокаў...</translation>
     </message>
     <message>
-        <source>Verifying wallet...</source>
-        <translation>Праверка гаманца...</translation>
-    </message>
-    <message>
         <source>Wallet options:</source>
         <translation>Опцыі гаманца:</translation>
     </message>
@@ -1352,10 +1356,6 @@
     <message>
         <source>Execute command when the best block changes (%s in cmd is replaced by block hash)</source>
         <translation>Выканаць каманду калі лепшы блок зменіцца (%s замяняецца на хэш блока)</translation>
-    </message>
-    <message>
-        <source>Loading addresses...</source>
-        <translation>Загружаем адрасы...</translation>
     </message>
     <message>
         <source>Insufficient funds</source>

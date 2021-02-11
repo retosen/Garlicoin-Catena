@@ -49,7 +49,7 @@ Optional dependencies:
  univalue    | Utility          | JSON parsing and encoding (bundled version will be used unless --with-system-univalue passed to configure)
  libzmq3     | ZMQ notification | Optional, allows generating ZMQ notifications (requires ZMQ version >= 4.x)
 
-For the versions used in the release, see [release-process.md](release-process.md) under *Fetch and build inputs*.
+For the versions used, see [dependencies.md](dependencies.md)
 
 Memory Requirements
 --------------------
@@ -65,7 +65,7 @@ Dependency Build Instructions: Ubuntu & Debian
 ----------------------------------------------
 Build requirements:
 
-    sudo apt-get install build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils
+    sudo apt-get install build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils python3
 
 Options when installing required Boost library files:
 
@@ -131,7 +131,7 @@ Dependency Build Instructions: Fedora
 -------------------------------------
 Build requirements:
 
-    sudo dnf install gcc-c++ libtool make autoconf automake openssl-devel libevent-devel boost-devel libdb4-devel libdb4-cxx-devel
+    sudo dnf install gcc-c++ libtool make autoconf automake openssl-devel libevent-devel boost-devel libdb4-devel libdb4-cxx-devel python3
 
 Optional:
 
@@ -162,10 +162,34 @@ turned off by default.  See the configure options for upnp behavior desired:
 	--disable-upnp-default   (the default) UPnP support turned off by default at runtime
 	--enable-upnp-default    UPnP support turned on by default at runtime
 
+Debian/Raspbian Stretch & Ubuntu Xenial or newer
+------------------------------------------------
+
+If your linux distro installs libssl-dev 1.1, you will need to downgrade it.
+
+Remove the current version of libssl-dev ( 1.1.0f-3 )
+`sudo apt-get remove libssl-dev`
+
+Set your repository list to point to "jessie" instead of "stretch", save and exit.
+`sudo nano /etc/apt/sources.list`
+
+Then do `sudo apt-get update` to download the packages for jessie
+
+Then do `sudo apt-get install libssl-dev` package, it should be version 1.0.1t-1
+
+Follow the instructions with `cd src && make -f makefile.unix`
+
+When complete, type `sudo apt-mark hold libssl-dev` to prevent the package from upgrading in the future
+
+Switch back your sources, by changing 'jessie' back to 'stretch' in sources.list
+
+Do a `sudo apt-get update` and `sudo apt-get upgrade` and make sure it doesn't try and install libssl-dev (it will say it has been kept back)
 
 Berkeley DB
 -----------
-It is recommended to use Berkeley DB 4.8. If you have to build it yourself:
+It is recommended to use Berkeley DB 4.8. If you have to build it yourself,
+you can use [the installation script included in contrib/](/contrib/install_db4.sh)
+like so
 
 ```bash
 GARLICOIN_ROOT=$(pwd)
@@ -180,6 +204,13 @@ echo '12edc0df75bf9abd7f82f821795bcee50f42cb2e5f76a6a281b85732798364ef  db-4.8.3
 # -> db-4.8.30.NC.tar.gz: OK
 tar -xzvf db-4.8.30.NC.tar.gz
 
+# Update config to support newer archs
+git clone https://git.savannah.gnu.org/git/config.git
+rm -f ./db-4.8.30.NC/dist/config.guess
+rm -f ./db-4.8.30.NC/dist/config.sub
+cp ./config/config.guess ./db-4.8.30.NC/dist/config.guess
+cp ./config/config.sub ./db-4.8.30.NC/dist/config.sub
+
 # Build the library and install to our prefix
 cd db-4.8.30.NC/build_unix/
 #  Note: Do a static build so that it can be embedded into the executable, instead of having to find a .so at runtime
@@ -191,6 +222,8 @@ cd $GARLICOIN_ROOT
 ./autogen.sh
 ./configure LDFLAGS="-L${BDB_PREFIX}/lib/" CPPFLAGS="-I${BDB_PREFIX}/include/" # (other args...)
 ```
+
+from the root of the repository.
 
 **Note**: You only need Berkeley DB if the wallet is enabled (see the section *Disable-Wallet mode* below).
 
@@ -340,7 +373,7 @@ with 4.8-built Garlicoin Core is needed follow the steps under "Berkeley DB" abo
 Then build using:
 
     ./autogen.sh
-    ./configure --with-incompatible-bdb BDB_CFLAGS="-I/usr/local/include/db5" BDB_LIBS="-L/usr/local/lib -ldb_cxx-5"
+    ./configure BDB_CFLAGS="-I${BDB_PREFIX}/include" BDB_LIBS="-L${BDB_PREFIX}/lib -ldb_cxx"
     gmake
 
 *Note on debugging*: The version of `gdb` installed by default is [ancient and considered harmful](https://wiki.freebsd.org/GdbRetirement).

@@ -1,5 +1,5 @@
 ---
-name: "garlicoin-linux-0.15"
+name: "garlicoin-linux-0.17"
 enable_cache: true
 suites:
 - "trusty"
@@ -28,7 +28,7 @@ packages:
 - "ca-certificates"
 - "python"
 remotes:
-- "url": "https://github.com/garlicoin-project/garlicoin.git"
+- "url": "https://github.com/GarlicoinOrg/Garlicoin.git"
   "dir": "garlicoin"
 files: []
 script: |
