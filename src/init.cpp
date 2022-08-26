@@ -13,6 +13,7 @@
 #include <amount.h>
 #include <chain.h>
 #include <chainparams.h>
+#include <checkpointsync.h>
 #include <checkpoints.h>
 #include <compat/sanity.h>
 #include <consensus/validation.h>
@@ -1120,6 +1121,15 @@ bool AppInitParameterInteraction()
 
     nMaxTipAge = gArgs.GetArg("-maxtipage", DEFAULT_MAX_TIP_AGE);
 
+    if (gArgs.IsArgSet("-checkpointkey")) // Checkpoint master priv key
+    {
+        if (!SetCheckpointPrivKey(gArgs.GetArg("-checkpointkey", "")))
+            return InitError("Unable to sign checkpoint, wrong checkpointkey?");
+    }
+
+    // Include NODE_ACP in services. Currently no arg to toggle this behaviour.
+    nLocalServices = ServiceFlags(nLocalServices | NODE_ACP);
+
     fEnableReplacement = gArgs.GetBoolArg("-mempoolreplacement", DEFAULT_ENABLE_REPLACEMENT);
     if ((!fEnableReplacement) && gArgs.IsArgSet("-mempoolreplacement")) {
         // Minimal effort at forwards compatibility
@@ -1530,6 +1540,15 @@ bool AppInitMain()
                     uiInterface.InitMessage(_("Rewinding blocks..."));
                     if (!RewindBlockIndex(chainparams)) {
                         strLoadError = _("Unable to rewind the database to a pre-fork state. You will need to redownload the blockchain");
+                        break;
+                    }
+                }
+
+                {
+                    LOCK(cs_main);
+                    uiInterface.InitMessage("Checking ACP ...");
+                    if (!CheckCheckpointPubKey()) {
+                        strLoadError = "Checking ACP pubkey failed";
                         break;
                     }
                 }

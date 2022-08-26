@@ -10,6 +10,7 @@
 #include <chainparams.h>
 #include <checkpoints.h>
 #include <checkqueue.h>
+#include <checkpointsync.h>
 #include <consensus/consensus.h>
 #include <consensus/merkle.h>
 #include <consensus/tx_verify.h>
@@ -1805,7 +1806,15 @@ bool CChainState::ConnectBlock(const CBlock& block, CValidationState& state, CBl
         return true;
     }
 
+    // Check that the block satisfies synchronized checkpoint
+    if (!IsInitialBlockDownload() && !CheckSyncCheckpoint(block.GetHash(), pindex->nHeight)) {
+        return state.Invalid(ValidationInvalidReason::BLOCK_CHECKPOINT, error("%s: Block rejected by synchronized checkpoint", __func__),
+                             REJECT_CHECKPOINT, "bad-block-checkpoint-sync");
+    }
+
     nBlocksTotal++;
+
+    
 
     bool fScriptChecks = true;
     if (!hashAssumeValid.IsNull()) {
@@ -3122,6 +3131,12 @@ static bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationSta
     if (block.GetBlockTime() <= pindexPrev->GetMedianTimePast())
         return state.Invalid(false, REJECT_INVALID, "time-too-old", "block's timestamp is too early");
 
+    // Check that the block satisfies synchronized checkpoint
+    if (!::ChainstateActive().IsInitialBlockDownload() && !CheckSyncCheckpoint(block.GetHash(), nHeight)) {
+        return state.Invalid(ValidationInvalidReason::BLOCK_CHECKPOINT, error("%s: Block rejected by synchronized checkpoint", __func__),
+                             REJECT_CHECKPOINT, "bad-block-checkpoint-sync");
+    }
+
     // Check timestamp
     if (block.GetBlockTime() > nAdjustedTime + MAX_FUTURE_BLOCK_TIME)
         return state.Invalid(false, REJECT_INVALID, "time-too-new", "block timestamp too far in the future");
@@ -3284,6 +3299,10 @@ bool CChainState::AcceptBlockHeader(const CBlockHeader& block, CValidationState&
 
     CheckBlockIndex(chainparams.GetConsensus());
 
+    if (!IsInitialBlockDownload())
+        AcceptPendingSyncCheckpoint();
+
+
     return true;
 }
 
@@ -3438,6 +3457,10 @@ bool ProcessNewBlock(const CChainParams& chainparams, const std::shared_ptr<cons
     CValidationState state; // Only used to report errors, not invalidity - ignore it
     if (!g_chainstate.ActivateBestChain(state, chainparams, pblock))
         return error("%s: ActivateBestChain failed", __func__);
+
+    // If responsible for sync-checkpoint send it
+    if (!CSyncCheckpoint::strMasterPrivKey.empty())
+        SendSyncCheckpoint(AutoSelectSyncCheckpoint());
 
     return true;
 }
@@ -3757,6 +3780,12 @@ bool static LoadBlockIndexDB(const CChainParams& chainparams)
             break;
         }
     }
+
+    // Load hashSyncCheckpoint
+    if (!pblocktree->ReadSyncCheckpoint(hashSyncCheckpoint))
+         LogPrintf("LoadBlockIndexDB(): synchronized checkpoint not read\n");
+    else
+         LogPrintf("LoadBlockIndexDB(): synchronized checkpoint %s\n", hashSyncCheckpoint.ToString().c_str());
 
     // Check presence of blk files
     LogPrintf("Checking all blk files are present...\n");
