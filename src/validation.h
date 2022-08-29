@@ -149,7 +149,7 @@ static const bool DEFAULT_PEERBLOOMFILTERS = true;
 /** Default for -stopatheight */
 static const int DEFAULT_STOPATHEIGHT = 0;
 /** Default for -maxreorgdepth */
-static const int DEFAULT_MAX_REORG_DEPTH = 47;
+static const int DEFAULT_MAX_REORG_DEPTH = 15;
 /**
  * Default for -finalizationdelay
  * This is the minimum time between a block header reception and the block
