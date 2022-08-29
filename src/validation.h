@@ -156,7 +156,7 @@ static const int DEFAULT_MAX_REORG_DEPTH = 15;
  * finalization.
  * This value should be >> block propagation and validation time
  */
-static const int64_t DEFAULT_MIN_FINALIZATION_DELAY = 2 * 60 * 60;
+static const int64_t DEFAULT_MIN_FINALIZATION_DELAY = 5 * 60;
 
 struct BlockHasher
 {
